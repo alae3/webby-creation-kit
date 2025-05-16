@@ -202,7 +202,7 @@ const TestimonialsManager = ({
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
-              <DialogTitle>{editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}</DialogTitle>
+              <DialogTitle>{editingTestimonial ? t('editTestimonial') : t('addNewTestimonial')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               <div className="grid grid-cols-2 gap-4">
@@ -261,10 +261,10 @@ const TestimonialsManager = ({
               
               <DialogFooter className="mt-6">
                 <Button type="button" variant="outline" onClick={handleCloseDialog}>
-                  Cancel
+                  {t('cancel')}
                 </Button>
                 <Button type="submit">
-                  {editingTestimonial ? 'Update Testimonial' : 'Add Testimonial'}
+                  {editingTestimonial ? t('updateTestimonial') : t('addTestimonial')}
                 </Button>
               </DialogFooter>
             </form>
