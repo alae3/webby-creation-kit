@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { 
@@ -11,53 +12,61 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { useProductStore } from "@/store/productStore";
+import { Link } from "react-router-dom";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Search } from "lucide-react";
 
 const Products = () => {
   const { products: allProducts } = useProductStore();
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [sortOption, setSortOption] = useState("default");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search");
   
-  // Apply filters and sorting
-  const handleSort = (value: string) => {
-    setSortOption(value);
-    let sorted = [...filteredProducts];
+  // Apply search, filters and sorting on mount and when dependencies change
+  useEffect(() => {
+    let result = [...allProducts];
     
-    switch(value) {
+    // Apply search filter if present
+    if (searchQuery) {
+      result = result.filter(product => 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Apply category filter if not set to "all"
+    if (categoryFilter !== "all") {
+      result = result.filter(product => product.category === categoryFilter);
+    }
+    
+    // Apply sorting
+    switch(sortOption) {
       case "price-low-high":
-        sorted.sort((a, b) => a.price - b.price);
+        result.sort((a, b) => a.price - b.price);
         break;
       case "price-high-low":
-        sorted.sort((a, b) => b.price - a.price);
+        result.sort((a, b) => b.price - a.price);
         break;
       case "newest":
-        sorted = sorted.filter(product => product.isNew).concat(
-          sorted.filter(product => !product.isNew)
+        result = result.filter(product => product.isNew).concat(
+          result.filter(product => !product.isNew)
         );
         break;
       default:
-        // Keep default order
-        sorted = categoryFilter === "all" 
-          ? [...allProducts]
-          : allProducts.filter(product => product.category === categoryFilter);
+        // Keep current order
+        break;
     }
     
-    setFilteredProducts(sorted);
+    setFilteredProducts(result);
+  }, [searchQuery, categoryFilter, sortOption, allProducts]);
+  
+  const handleSort = (value: string) => {
+    setSortOption(value);
   };
   
   const handleCategoryFilter = (value: string) => {
     setCategoryFilter(value);
-    
-    if (value === "all") {
-      setFilteredProducts(allProducts);
-    } else {
-      setFilteredProducts(allProducts.filter(product => product.category === value));
-    }
-    
-    // Reapply current sort if any
-    if (sortOption !== "default") {
-      handleSort(sortOption);
-    }
   };
 
   return (
@@ -70,6 +79,17 @@ const Products = () => {
           <p className="text-lg text-morocco-navy/70 mb-8">
             Explore our complete collection of high-quality children's clothing and accessories.
           </p>
+          
+          {searchQuery && (
+            <Alert className="bg-morocco-sand/20 mb-6">
+              <Search className="h-4 w-4" />
+              <AlertTitle>Search Results</AlertTitle>
+              <AlertDescription>
+                Showing results for: <span className="font-semibold">{searchQuery}</span>
+                {' '} ({filteredProducts.length} items found)
+              </AlertDescription>
+            </Alert>
+          )}
           
           {/* Filters */}
           <div className="flex flex-col md:flex-row justify-between mb-8 gap-4">
@@ -108,11 +128,28 @@ const Products = () => {
           </div>
           
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {filteredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <h3 className="text-xl font-semibold mb-4">No products found</h3>
+              <p className="text-gray-500 mb-6">
+                {searchQuery 
+                  ? "Try a different search term or browse our categories." 
+                  : "Please try a different category or check back later."}
+              </p>
+              <Button asChild variant="outline" className="mr-2">
+                <Link to="/products">View All Products</Link>
+              </Button>
+              <Button asChild>
+                <Link to="/">Back to Home</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </main>
       

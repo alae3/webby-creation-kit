@@ -17,6 +17,7 @@ export interface Product {
   rating: number;
   category?: string;
   description?: string;
+  inStock?: boolean;
 }
 
 interface ProductCardProps {
@@ -24,7 +25,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { id, name, price, originalPrice, image, isNew, isSale, rating } = product;
+  const { id, name, price, originalPrice, image, isNew, isSale, rating, inStock = true } = product;
   const { addItem } = useCartStore();
   
   const discount = originalPrice 
@@ -34,6 +35,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const handleAddToBag = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
+    
+    if (!inStock) {
+      toast.error(`${name} is currently out of stock!`);
+      return;
+    }
+    
     addItem(product);
     toast.success(`${name} added to your bag!`);
   };
@@ -51,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img 
           src={image} 
           alt={name}
-          className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+          className={`h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105 ${!inStock ? 'opacity-70' : ''}`}
         />
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {isNew && (
@@ -59,6 +66,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
           {isSale && (
             <Badge className="bg-morocco-terracotta">-{discount}%</Badge>
+          )}
+          {!inStock && (
+            <Badge className="bg-gray-700">Out of Stock</Badge>
           )}
         </div>
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"></div>
@@ -75,11 +85,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </Button>
             <Button 
               size="sm" 
-              className="bg-white hover:bg-morocco-terracotta text-morocco-navy hover:text-white rounded-full flex gap-1 px-4"
+              className={`bg-white hover:bg-morocco-terracotta text-morocco-navy hover:text-white rounded-full flex gap-1 px-4 ${!inStock ? 'opacity-50 cursor-not-allowed' : ''}`}
               onClick={handleAddToBag}
+              disabled={!inStock}
             >
               <ShoppingBag className="h-4 w-4" />
-              <span>Add to Bag</span>
+              <span>{inStock ? 'Add to Bag' : 'Out of Stock'}</span>
             </Button>
           </div>
         </div>
