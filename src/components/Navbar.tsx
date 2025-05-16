@@ -78,7 +78,16 @@ const Navbar = () => {
 
           {/* Right side icons */}
           <div className="flex items-center space-x-4">
-            {/* Language Switcher */}
+            <Button variant="ghost" size="icon" className="hidden md:flex" onClick={toggleSearch}>
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/cart">
+                <ShoppingBag className="h-5 w-5" />
+              </Link>
+            </Button>
+            
+            {/* Language Switcher - moved to after shopping bag */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="relative">
@@ -101,14 +110,6 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
             
-            <Button variant="ghost" size="icon" className="hidden md:flex" onClick={toggleSearch}>
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <Link to="/cart">
-                <ShoppingBag className="h-5 w-5" />
-              </Link>
-            </Button>
             <Button variant="ghost" size="icon" asChild>
               <Link to={isAuthenticated ? "/admin" : "/login"}>
                 <User className="h-5 w-5" />

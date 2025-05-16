@@ -9,7 +9,7 @@ interface ProductStore {
   updateProduct: (updatedProduct: Product) => void;
 }
 
-// Initial products from our store
+// Initial products from our store with stock quantity
 const initialProducts: Product[] = [
   // Trending Products
   {
@@ -22,7 +22,8 @@ const initialProducts: Product[] = [
     rating: 5,
     category: "girls",
     description: "This beautiful Moroccan print dress is made with high-quality cotton fabric, perfect for your little girl's comfort and style. The traditional patterns are combined with modern design elements.",
-    inStock: true
+    inStock: true,
+    stockQuantity: 15
   },
   {
     id: 2,
@@ -33,7 +34,8 @@ const initialProducts: Product[] = [
     rating: 4,
     category: "boys",
     description: "Lightweight and breathable boys T-shirt, perfect for summer days. Made with organic cotton and featuring a playful Moroccan-inspired design.",
-    inStock: false
+    inStock: false,
+    stockQuantity: 0
   },
   {
     id: 3,
@@ -42,7 +44,8 @@ const initialProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1518831959646-28f35d4d8fbc?auto=format&fit=crop&w=800&q=80",
     rating: 5,
     category: "baby",
-    inStock: true
+    inStock: true,
+    stockQuantity: 8
   },
   {
     id: 4,
@@ -53,7 +56,8 @@ const initialProducts: Product[] = [
     isSale: true,
     rating: 4,
     category: "girls",
-    inStock: false
+    inStock: false,
+    stockQuantity: 0
   },
   // New Arrivals
   {
@@ -64,7 +68,8 @@ const initialProducts: Product[] = [
     isNew: true,
     rating: 5,
     category: "accessories",
-    inStock: true
+    inStock: true,
+    stockQuantity: 25
   },
   {
     id: 6,
@@ -74,7 +79,8 @@ const initialProducts: Product[] = [
     isNew: true,
     rating: 4,
     category: "boys",
-    inStock: true
+    inStock: true,
+    stockQuantity: 12
   },
   {
     id: 7,
@@ -84,7 +90,8 @@ const initialProducts: Product[] = [
     isNew: true,
     rating: 4,
     category: "girls",
-    inStock: true
+    inStock: true,
+    stockQuantity: 7
   },
   {
     id: 8,
@@ -94,7 +101,8 @@ const initialProducts: Product[] = [
     isNew: true,
     rating: 5,
     category: "girls",
-    inStock: true
+    inStock: true,
+    stockQuantity: 20
   },
   // Bestsellers
   {
@@ -106,7 +114,8 @@ const initialProducts: Product[] = [
     isSale: true,
     rating: 5,
     category: "baby",
-    inStock: true
+    inStock: true,
+    stockQuantity: 18
   },
   {
     id: 10,
@@ -115,7 +124,8 @@ const initialProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?auto=format&fit=crop&w=800&q=80",
     rating: 5,
     category: "boys",
-    inStock: false
+    inStock: false,
+    stockQuantity: 0
   },
   {
     id: 11,
@@ -126,7 +136,8 @@ const initialProducts: Product[] = [
     isSale: true,
     rating: 4,
     category: "accessories",
-    inStock: true
+    inStock: true,
+    stockQuantity: 5
   },
   {
     id: 12,
@@ -135,7 +146,8 @@ const initialProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=800&q=80",
     rating: 5,
     category: "boys",
-    inStock: true
+    inStock: true,
+    stockQuantity: 10
   }
 ];
 

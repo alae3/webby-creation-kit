@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Star, Trash, Edit } from 'lucide-react';
 import { toast } from "sonner";
+import { useLanguageStore } from '@/store/languageStore';
 import { 
   Table, 
   TableBody, 
@@ -45,6 +46,7 @@ const TestimonialsManager = ({
   const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { t } = useLanguageStore();
   
   // Form state
   const [name, setName] = useState("");
@@ -134,20 +136,20 @@ const TestimonialsManager = ({
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Testimonial Management</CardTitle>
-        <Button onClick={() => handleOpenDialog()}>Add New Testimonial</Button>
+        <CardTitle>{t('testimonialManagement')}</CardTitle>
+        <Button onClick={() => handleOpenDialog()}>{t('addNewTestimonial')}</Button>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Image</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Location</TableHead>
-                <TableHead>Rating</TableHead>
-                <TableHead>Text</TableHead>
-                <TableHead>Actions</TableHead>
+                <TableHead>{t('image')}</TableHead>
+                <TableHead>{t('name')}</TableHead>
+                <TableHead>{t('location')}</TableHead>
+                <TableHead>{t('rating')}</TableHead>
+                <TableHead>{t('text')}</TableHead>
+                <TableHead>{t('actions')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -205,7 +207,7 @@ const TestimonialsManager = ({
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name">{t('name')}</Label>
                   <Input 
                     id="name" 
                     value={name} 
@@ -214,7 +216,7 @@ const TestimonialsManager = ({
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="location">Location</Label>
+                  <Label htmlFor="location">{t('location')}</Label>
                   <Input 
                     id="location" 
                     value={location} 
@@ -225,7 +227,7 @@ const TestimonialsManager = ({
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="image">Image URL</Label>
+                <Label htmlFor="image">{t('image')} URL</Label>
                 <Input 
                   id="image" 
                   value={image} 
@@ -235,7 +237,7 @@ const TestimonialsManager = ({
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="rating">Rating (1-5)</Label>
+                <Label htmlFor="rating">{t('rating')} (1-5)</Label>
                 <Input 
                   id="rating" 
                   type="number" 
@@ -247,7 +249,7 @@ const TestimonialsManager = ({
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="text">Testimonial Text</Label>
+                <Label htmlFor="text">{t('text')}</Label>
                 <Textarea 
                   id="text" 
                   value={text} 
