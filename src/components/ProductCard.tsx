@@ -18,6 +18,7 @@ export interface Product {
   category?: string;
   description?: string;
   inStock?: boolean;
+  stockQuantity?: number;
 }
 
 interface ProductCardProps {
