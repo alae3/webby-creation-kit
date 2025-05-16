@@ -1,25 +1,28 @@
 
 import { Shield, Truck, RefreshCw, Clock } from 'lucide-react';
-
-const benefits = [{
-  icon: <Truck className="h-8 w-8 text-morocco-blue" />,
-  title: "Free Shipping",
-  description: "Free nationwide shipping on all orders over 500 MAD"
-}, {
-  icon: <Shield className="h-8 w-8 text-morocco-terracotta" />,
-  title: "Superior Quality",
-  description: "Made with premium materials for long-lasting comfort"
-}, {
-  icon: <RefreshCw className="h-8 w-8 text-morocco-green" />,
-  title: "Easy Returns",
-  description: "30-day hassle-free return & exchange policy"
-}, {
-  icon: <Clock className="h-8 w-8 text-morocco-yellow" />,
-  title: "24/7 Support",
-  description: "Dedicated customer service for all your queries"
-}];
+import { useLanguageStore } from '@/store/languageStore';
 
 const Benefits = () => {
+  const { language, t } = useLanguageStore();
+  
+  const benefits = [{
+    icon: <Truck className="h-8 w-8 text-morocco-blue" />,
+    title: t('freeShipping'),
+    description: t('freeShippingDesc')
+  }, {
+    icon: <Shield className="h-8 w-8 text-morocco-terracotta" />,
+    title: t('superiorQuality'),
+    description: t('superiorQualityDesc')
+  }, {
+    icon: <RefreshCw className="h-8 w-8 text-morocco-green" />,
+    title: t('easyReturns'),
+    description: t('easyReturnsDesc')
+  }, {
+    icon: <Clock className="h-8 w-8 text-morocco-yellow" />,
+    title: t('customerSupport'),
+    description: t('customerSupportDesc')
+  }];
+
   return (
     <section className="py-12 bg-white">
       <div className="container-custom">

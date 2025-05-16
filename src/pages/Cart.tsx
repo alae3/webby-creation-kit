@@ -5,27 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ShoppingBag, Plus, Minus, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
+import { useLanguageStore } from "@/store/languageStore";
 
 const Cart = () => {
   const { items, removeItem, updateQuantity, getTotal } = useCartStore();
+  const { language, t } = useLanguageStore();
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
         <div className="container-custom py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">Your Shopping Cart</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">{t('yourCart')}</h1>
           
           {items.length === 0 ? (
             <div className="bg-white rounded-lg shadow-sm p-8 flex flex-col items-center justify-center">
               <ShoppingBag className="h-16 w-16 text-morocco-navy/20 mb-4" />
-              <h2 className="text-xl font-medium mb-2">Your cart is empty</h2>
+              <h2 className="text-xl font-medium mb-2">{t('cartEmpty')}</h2>
               <p className="text-gray-500 mb-6 text-center">
-                Looks like you haven't added any products to your cart yet.
+                {t('cartEmptyMessage')}
               </p>
               <Button asChild>
-                <Link to="/products">Start Shopping</Link>
+                <Link to="/products">{t('startShopping')}</Link>
               </Button>
             </div>
           ) : (
@@ -33,7 +35,7 @@ const Cart = () => {
               {/* Cart Items */}
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-lg shadow-sm p-6">
-                  <h2 className="text-xl font-medium mb-4">Cart Items ({items.length})</h2>
+                  <h2 className="text-xl font-medium mb-4">{t('cartItems')} ({items.length})</h2>
                   
                   <div className="divide-y">
                     {items.map((item) => (
@@ -104,37 +106,37 @@ const Cart = () => {
               {/* Order Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
-                  <h2 className="text-xl font-medium mb-4">Order Summary</h2>
+                  <h2 className="text-xl font-medium mb-4">{t('orderSummary')}</h2>
                   
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Subtotal</span>
+                      <span className="text-gray-600">{t('subtotal')}</span>
                       <span>{getTotal().toFixed(2)} MAD</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Shipping</span>
-                      <span>Free</span>
+                      <span className="text-gray-600">{t('shipping')}</span>
+                      <span>{t('free')}</span>
                     </div>
                   </div>
                   
                   <div className="border-t pt-2 mb-6">
                     <div className="flex justify-between font-medium text-lg">
-                      <span>Total</span>
+                      <span>{t('total')}</span>
                       <span className="text-morocco-terracotta">{getTotal().toFixed(2)} MAD</span>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <Button asChild className="w-full bg-morocco-navy hover:bg-morocco-terracotta">
-                      <Link to="/checkout">Proceed to Checkout</Link>
+                      <Link to="/checkout">{t('proceedToCheckout')}</Link>
                     </Button>
                     
                     <div className="flex justify-between">
                       <Link to="/size-guide" className="text-center text-morocco-navy hover:text-morocco-terracotta">
-                        Size Guide
+                        {t('sizeGuide')}
                       </Link>
                       <Link to="/shipping" className="text-center text-morocco-navy hover:text-morocco-terracotta">
-                        Shipping & Returns
+                        {t('shippingAndReturns')}
                       </Link>
                     </div>
                   </div>

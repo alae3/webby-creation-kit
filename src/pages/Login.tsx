@@ -8,56 +8,58 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Lock } from "lucide-react";
+import { useLanguageStore } from "@/store/languageStore";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuthStore();
   const navigate = useNavigate();
+  const { t, language } = useLanguageStore();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (login(username, password)) {
-      toast.success("Login successful!");
+      toast.success(t('loginSuccessful'));
       navigate("/admin");
     } else {
-      toast.error("Invalid username or password");
+      toast.error(t('invalidCredentials'));
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="w-full max-w-md p-4">
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
               <span className="text-morocco-terracotta">Najih</span>
               <span className="text-morocco-navy">Kids</span>
-              <span className="block text-base text-gray-600 mt-1">Admin Panel</span>
+              <span className="block text-base text-gray-600 mt-1">{t('adminPanel')}</span>
             </CardTitle>
             <CardDescription className="text-center">
-              Enter your credentials to access the admin panel
+              {t('loginCredentialsPrompt')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">{t('username')}</Label>
                 <Input 
                   id="username"
-                  placeholder="Enter your username" 
+                  placeholder={t('enterUsername')}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('password')}</Label>
                 <Input 
                   id="password" 
                   type="password" 
-                  placeholder="Enter your password" 
+                  placeholder={t('enterPassword')} 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -65,13 +67,13 @@ const Login = () => {
               </div>
               <Button type="submit" className="w-full">
                 <Lock className="mr-2 h-4 w-4" />
-                Login
+                {t('login')}
               </Button>
             </form>
           </CardContent>
           <CardFooter>
             <p className="text-sm text-center w-full text-gray-600">
-              Protected area. Unauthorized access is prohibited.
+              {t('protectedAreaWarning')}
             </p>
           </CardFooter>
         </Card>

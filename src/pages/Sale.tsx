@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { useProductStore } from "@/store/productStore";
+import { useLanguageStore } from "@/store/languageStore";
 
 const Sale = () => {
   const { products } = useProductStore();
+  const { language, t } = useLanguageStore();
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
   const [displayProducts, setDisplayProducts] = useState(products.filter(product => product.isSale));
@@ -28,21 +30,21 @@ const Sale = () => {
   }, [searchQuery, products]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
         <div className="container-custom py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-2">Sale Items</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-2">{t('saleItems')}</h1>
           <p className="text-lg text-morocco-terracotta font-medium mb-8">
-            Special offers on selected items - Limited time only!
+            {t('specialOffers')}
           </p>
           
           {searchQuery && (
             <div className="mb-6">
               <p className="text-md">
-                Search results for: <span className="font-semibold">{searchQuery}</span>
-                {' '} ({displayProducts.length} items found)
+                {t('searchResultsFor')}: <span className="font-semibold">{searchQuery}</span>
+                {' '} ({displayProducts.length} {t('itemsFound')})
               </p>
             </div>
           )}
@@ -55,16 +57,16 @@ const Sale = () => {
           
           {displayProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-lg mb-4">No products found matching your search.</p>
+              <p className="text-lg mb-4">{t('noProductsFound')}</p>
               <Button asChild>
-                <Link to="/sale">View All Sale Items</Link>
+                <Link to="/sale">{t('viewAllSaleItems')}</Link>
               </Button>
             </div>
           )}
           
           <div className="text-center mt-8">
             <Button asChild>
-              <Link to="/">Continue Shopping</Link>
+              <Link to="/">{t('continueShopping')}</Link>
             </Button>
           </div>
         </div>
