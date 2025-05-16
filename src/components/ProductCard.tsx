@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '@/store/cartStore';
+import { useLanguageStore } from '@/store/languageStore';
 
 export interface Product {
   id: number;
@@ -26,8 +27,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { id, name, price, originalPrice, image, isNew, isSale, rating, inStock = true } = product;
+  const { id, name, price, originalPrice, image, isNew, isSale, rating, inStock = true, stockQuantity = 0 } = product;
   const { addItem } = useCartStore();
+  const { t } = useLanguageStore();
   
   const discount = originalPrice 
     ? Math.round(((originalPrice - price) / originalPrice) * 100) 
@@ -38,18 +40,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.preventDefault();
     
     if (!inStock) {
-      toast.error(`${name} is currently out of stock!`);
+      toast.error(`${name} ${t('outOfStock')}!`);
       return;
     }
     
     addItem(product);
-    toast.success(`${name} added to your bag!`);
+    toast.success(`${name} ${t('addToBag')}!`);
   };
 
   const handleAddToWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     toast.success(`${name} added to your wishlist!`);
+  };
+
+  // Display a message for stock quantity
+  const getStockMessage = () => {
+    if (!inStock) return t('outOfStock');
+    if (stockQuantity && stockQuantity < 5) {
+      return t('onlyFewLeft').replace('{count}', stockQuantity.toString());
+    }
+    return t('inStock');
   };
 
   return (
@@ -69,7 +80,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <Badge className="bg-morocco-terracotta">-{discount}%</Badge>
           )}
           {!inStock && (
-            <Badge className="bg-gray-700">Out of Stock</Badge>
+            <Badge className="bg-gray-700">{t('outOfStock')}</Badge>
           )}
         </div>
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200"></div>
@@ -91,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               disabled={!inStock}
             >
               <ShoppingBag className="h-4 w-4" />
-              <span>{inStock ? 'Add to Bag' : 'Out of Stock'}</span>
+              <span>{inStock ? t('addToBag') : t('outOfStock')}</span>
             </Button>
           </div>
         </div>
@@ -110,6 +121,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           ) : (
             <span className="font-semibold">{price.toFixed(2)} MAD</span>
           )}
+        </div>
+        
+        {/* Stock quantity indicator */}
+        <div className="text-sm mt-1">
+          <span className={`${!inStock ? 'text-red-500' : stockQuantity && stockQuantity < 5 ? 'text-amber-500' : 'text-green-600'}`}>
+            {getStockMessage()}
+          </span>
         </div>
         
         <div className="flex mt-1">

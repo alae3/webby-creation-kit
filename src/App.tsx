@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
+import { useLanguageStore } from "@/store/languageStore";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import Girls from "./pages/Girls";
 import Boys from "./pages/Boys";
@@ -38,12 +40,25 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   return children;
 };
 
+// Language setup component
+const LanguageSetup = () => {
+  const { language } = useLanguageStore();
+  
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+  }, [language]);
+  
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <LanguageSetup />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/girls" element={<Girls />} />

@@ -2,12 +2,14 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePageContentStore } from "@/store/pageContentStore";
+import { useLanguageStore } from "@/store/languageStore";
 
 const ShippingReturns = () => {
   const { pages } = usePageContentStore();
+  const { language } = useLanguageStore();
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
