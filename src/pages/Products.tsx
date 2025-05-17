@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -15,9 +16,11 @@ import { useProductStore } from "@/store/productStore";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Search } from "lucide-react";
+import { useLanguageStore } from "@/store/languageStore";
 
 const Products = () => {
   const { products: allProducts } = useProductStore();
+  const { t, language } = useLanguageStore();
   const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [sortOption, setSortOption] = useState("default");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -70,23 +73,23 @@ const Products = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
         <div className="container-custom py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">All Products</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">{t('viewAllProducts')}</h1>
           <p className="text-lg text-morocco-navy/70 mb-8">
-            Explore our complete collection of high-quality children's clothing and accessories.
+            {t('exploreMoreCollections')}
           </p>
           
           {searchQuery && (
             <Alert className="bg-morocco-sand/20 mb-6">
               <Search className="h-4 w-4" />
-              <AlertTitle>Search Results</AlertTitle>
+              <AlertTitle>{t('searchResultsFor')}</AlertTitle>
               <AlertDescription>
-                Showing results for: <span className="font-semibold">{searchQuery}</span>
-                {' '} ({filteredProducts.length} items found)
+                {t('searchResultsFor')}: <span className="font-semibold">{searchQuery}</span>
+                {' '} ({filteredProducts.length} {t('itemsFound')})
               </AlertDescription>
             </Alert>
           )}
@@ -97,33 +100,33 @@ const Products = () => {
               <div className="w-full sm:w-48">
                 <Select value={categoryFilter} onValueChange={handleCategoryFilter}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Category" />
+                    <SelectValue placeholder={t('category')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
-                    <SelectItem value="boys">Boys</SelectItem>
-                    <SelectItem value="girls">Girls</SelectItem>
-                    <SelectItem value="baby">Baby</SelectItem>
-                    <SelectItem value="accessories">Accessories</SelectItem>
+                    <SelectItem value="all">{t('allCategories')}</SelectItem>
+                    <SelectItem value="boys">{t('boys')}</SelectItem>
+                    <SelectItem value="girls">{t('girls')}</SelectItem>
+                    <SelectItem value="baby">{t('baby')}</SelectItem>
+                    <SelectItem value="accessories">{t('accessories')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="w-full sm:w-48">
                 <Select value={sortOption} onValueChange={handleSort}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Sort by" />
+                    <SelectValue placeholder={t('sortBy')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="default">Default</SelectItem>
-                    <SelectItem value="price-low-high">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high-low">Price: High to Low</SelectItem>
-                    <SelectItem value="newest">Newest First</SelectItem>
+                    <SelectItem value="default">{t('default')}</SelectItem>
+                    <SelectItem value="price-low-high">{t('priceLowHigh')}</SelectItem>
+                    <SelectItem value="price-high-low">{t('priceHighLow')}</SelectItem>
+                    <SelectItem value="newest">{t('newestFirst')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div className="text-sm text-gray-500">
-              Showing {filteredProducts.length} products
+              {t('showing')} {filteredProducts.length} {t('products')}
             </div>
           </div>
           
@@ -136,17 +139,17 @@ const Products = () => {
             </div>
           ) : (
             <div className="text-center py-12">
-              <h3 className="text-xl font-semibold mb-4">No products found</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('noProductsFound')}</h3>
               <p className="text-gray-500 mb-6">
                 {searchQuery 
-                  ? "Try a different search term or browse our categories." 
-                  : "Please try a different category or check back later."}
+                  ? t('tryDifferentSearch') 
+                  : t('tryDifferentCategory')}
               </p>
               <Button asChild variant="outline" className="mr-2">
-                <Link to="/products">View All Products</Link>
+                <Link to="/products">{t('viewAllProducts')}</Link>
               </Button>
               <Button asChild>
-                <Link to="/">Back to Home</Link>
+                <Link to="/">{t('returnToHome')}</Link>
               </Button>
             </div>
           )}

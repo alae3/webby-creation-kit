@@ -185,6 +185,22 @@ const translations = {
     faqCare3Question: 'How can I maintain the quality of the clothes?',
     faqCare3Answer: 'To maintain the quality of your NajihKids clothing, we recommend washing in cold water, avoiding bleach or harsh detergents, and air-drying when possible. For stain removal, treat the stain promptly with a gentle stain remover before washing.',
     
+    // Product Listings
+    category: 'Category',
+    allCategories: 'All Categories',
+    accessories: 'Accessories',
+    sortBy: 'Sort by',
+    default: 'Default',
+    priceLowHigh: 'Price: Low to High',
+    priceHighLow: 'Price: High to Low',
+    newestFirst: 'Newest First',
+    showing: 'Showing',
+    products: 'products',
+    noProductsFound: 'No products found',
+    tryDifferentSearch: 'Try a different search term or browse our categories.',
+    tryDifferentCategory: 'Please try a different category or check back later.',
+    exploreMoreCollections: 'Explore our complete collection of high-quality children\'s clothing and accessories.',
+    
     // NotFound
     notFoundTitle: '404',
     notFoundMessage: 'Oops! Page not found',
@@ -363,6 +379,22 @@ const translations = {
     faqCare3Question: 'كيف يمكنني الحفاظ على جودة الملابس؟',
     faqCare3Answer: 'للحفاظ على جودة ملابس ناجح كيدز، نوصي بالغسيل بالماء البارد، وتجنب المبيض أو المنظفات القاسية، والتجفيف الهوائي عند الإمكان. لإزالة البقع، عالج البقعة فورًا بمزيل بقع لطيف قبل الغسيل.',
     
+    // Product Listings
+    category: 'الفئة',
+    allCategories: 'كل الفئات',
+    accessories: 'إكسسوارات',
+    sortBy: 'ترتيب حسب',
+    default: 'افتراضي',
+    priceLowHigh: 'السعر: من الأقل إلى الأعلى',
+    priceHighLow: 'السعر: من الأعلى إلى الأقل',
+    newestFirst: 'الأحدث أولاً',
+    showing: 'عرض',
+    products: 'منتجات',
+    noProductsFound: 'لم يتم العثور على منتجات',
+    tryDifferentSearch: 'جرب مصطلح بحث مختلف أو تصفح فئاتنا.',
+    tryDifferentCategory: 'الرجاء تجربة فئة مختلفة أو التحقق مرة أخرى لاحقًا.',
+    exploreMoreCollections: 'استكشف مجموعتنا الكاملة من ملابس الأطفال وإكسسواراتهم عالية الجودة.',
+    
     // NotFound
     notFoundTitle: '404',
     notFoundMessage: 'عذراً! الصفحة غير موجودة',
@@ -537,9 +569,25 @@ const translations = {
     faqCare1Question: 'Comment dois-je laver les vêtements NajihKids?',
     faqCare1Answer: 'Nous recommandons de laver nos vêtements en machine à l\'eau froide avec des couleurs similaires et d\'utiliser un cycle délicat. Évitez d\'utiliser de l\'eau de Javel ou des détergents agressifs. Pour des instructions d\'entretien détaillées pour des articles spécifiques, veuillez vous référer à l\'étiquette d\'entretien sur chaque vêtement.',
     faqCare2Question: 'Puis-je repasser les vêtements NajihKids?',
-    faqCare2Answer: 'Oui, la plupart de nos vêtements peuvent être repassés à un réglage faible à moyen. Pour les vêtements avec broderie ou détails spéciaux, nous recommandons de repasser à l\'envers pour protéger ces caractéristiques. Vérifiez toujours l\'étiquette d\'entretien pour des instructions spécifiques.',
+    faqCare2Answer: 'Oui, la plupart de nos vêtements peuvent être repassés à un réglage faible à moyen. Pour les vêtements avec broderie ou détails sp��ciaux, nous recommandons de repasser à l\'envers pour protéger ces caractéristiques. Vérifiez toujours l\'étiquette d\'entretien pour des instructions spécifiques.',
     faqCare3Question: 'Comment puis-je maintenir la qualité des vêtements?',
     faqCare3Answer: 'Pour maintenir la qualité de vos vêtements NajihKids, nous recommandons de les laver à l\'eau froide, d\'éviter l\'eau de Javel ou les détergents agressifs, et de les sécher à l\'air libre quand c\'est possible. Pour l\'élimination des taches, traitez la tache rapidement avec un détachant doux avant le lavage.',
+    
+    // Product Listings
+    category: 'Catégorie',
+    allCategories: 'Toutes les Catégories',
+    accessories: 'Accessoires',
+    sortBy: 'Trier par',
+    default: 'Par défaut',
+    priceLowHigh: 'Prix: Croissant',
+    priceHighLow: 'Prix: Décroissant',
+    newestFirst: 'Plus récent d\'abord',
+    showing: 'Affichage de',
+    products: 'produits',
+    noProductsFound: 'Aucun produit trouvé',
+    tryDifferentSearch: 'Essayez un terme de recherche différent ou parcourez nos catégories.',
+    tryDifferentCategory: 'Veuillez essayer une catégorie différente ou vérifier plus tard.',
+    exploreMoreCollections: 'Explorez notre collection complète de vêtements et accessoires pour enfants de haute qualité.',
     
     // NotFound
     notFoundTitle: '404',

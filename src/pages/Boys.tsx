@@ -9,11 +9,11 @@ import { useLanguageStore } from "@/store/languageStore";
 
 const Boys = () => {
   const { products } = useProductStore();
-  const { t } = useLanguageStore();
+  const { t, language } = useLanguageStore();
   const boysProducts = products.filter(product => product.category === "boys");
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">

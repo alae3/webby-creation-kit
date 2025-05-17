@@ -1,10 +1,12 @@
 
 import { Link } from 'react-router-dom';
 import { useLanguageStore } from '@/store/languageStore';
+import { useEffect } from 'react';
 
 const CategoryFeature = () => {
-  const { t } = useLanguageStore();
+  const { t, language } = useLanguageStore();
   
+  // Create categories after translation is loaded to ensure they use the right text
   const categories = [
     {
       id: 1,
@@ -44,6 +46,10 @@ const CategoryFeature = () => {
                 src={category.image} 
                 alt={category.title}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                onError={(e) => {
+                  console.error("Failed to load image:", e.currentTarget.src);
+                  e.currentTarget.src = "https://placehold.co/800x600?text=Image+Not+Found";
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-morocco-navy/60 to-transparent flex items-end p-6">
                 <div className="text-white">
