@@ -22,50 +22,76 @@ export const useCartStore = create<CartStore>()(
       items: [],
       
       addProduct: (product: Product) => {
-        console.log("Adding product to cart:", product.name);
-        set((state) => {
-          const existingItem = state.items.find(item => item.id === product.id);
-          
-          if (existingItem) {
-            // If item already in cart, increase quantity
-            return {
-              items: state.items.map(item => 
-                item.id === product.id 
-                  ? { ...item, quantity: item.quantity + 1 } 
-                  : item
-              )
-            };
-          } else {
-            // Add new item with quantity 1
-            return { 
-              items: [...state.items, { ...product, quantity: 1 }] 
-            };
+        try {
+          console.log("Adding product to cart:", product.name);
+          if (!product || !product.id) {
+            console.error("Invalid product provided to addProduct:", product);
+            return;
           }
-        });
+          
+          set((state) => {
+            const existingItem = state.items.find(item => item.id === product.id);
+            
+            if (existingItem) {
+              // If item already in cart, increase quantity
+              return {
+                items: state.items.map(item => 
+                  item.id === product.id 
+                    ? { ...item, quantity: item.quantity + 1 } 
+                    : item
+                )
+              };
+            } else {
+              // Add new item with quantity 1
+              return { 
+                items: [...state.items, { ...product, quantity: 1 }] 
+              };
+            }
+          });
+        } catch (error) {
+          console.error("Error in addProduct:", error);
+        }
       },
       
       removeItem: (productId: number) => {
-        set((state) => ({
-          items: state.items.filter(item => item.id !== productId)
-        }));
+        try {
+          set((state) => ({
+            items: state.items.filter(item => item.id !== productId)
+          }));
+        } catch (error) {
+          console.error("Error in removeItem:", error);
+        }
       },
       
       updateQuantity: (productId: number, quantity: number) => {
-        set((state) => ({
-          items: state.items.map(item => 
-            item.id === productId 
-              ? { ...item, quantity: Math.max(1, quantity) } 
-              : item
-          )
-        }));
+        try {
+          set((state) => ({
+            items: state.items.map(item => 
+              item.id === productId 
+                ? { ...item, quantity: Math.max(1, quantity) } 
+                : item
+            )
+          }));
+        } catch (error) {
+          console.error("Error in updateQuantity:", error);
+        }
       },
       
       clearCart: () => {
-        set({ items: [] });
+        try {
+          set({ items: [] });
+        } catch (error) {
+          console.error("Error in clearCart:", error);
+        }
       },
       
       getTotal: () => {
-        return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
+        try {
+          return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
+        } catch (error) {
+          console.error("Error in getTotal:", error);
+          return 0;
+        }
       }
     }),
     {

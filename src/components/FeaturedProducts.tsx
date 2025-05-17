@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 import { useProductStore } from '@/store/productStore';
+import { ErrorBoundary } from './ErrorBoundary';
 
 const FeaturedProducts = () => {
   const [activeTab, setActiveTab] = useState("trending");
@@ -12,21 +13,46 @@ const FeaturedProducts = () => {
   
   // Add debugging
   useEffect(() => {
-    console.log("FeaturedProducts rendered with", products.length, "products");
-  }, [products.length]);
+    try {
+      console.log("FeaturedProducts rendered with", products?.length || 0, "products");
+      if (!products || products.length === 0) {
+        console.warn("No products available in the store");
+      }
+    } catch (error) {
+      console.error("Error in FeaturedProducts useEffect:", error);
+    }
+  }, [products]);
   
-  // Filter products based on categories
-  const trendingProducts = useMemo(() => 
-    products.filter((product, index) => index < 4), [products]
-  );
+  // Filter products with error handling
+  const trendingProducts = useMemo(() => {
+    try {
+      if (!products || products.length === 0) return [];
+      return products.filter((product, index) => index < 4);
+    } catch (error) {
+      console.error("Error filtering trending products:", error);
+      return [];
+    }
+  }, [products]);
   
-  const newArrivals = useMemo(() => 
-    products.filter(product => product.isNew).slice(0, 4), [products]
-  );
+  const newArrivals = useMemo(() => {
+    try {
+      if (!products || products.length === 0) return [];
+      return products.filter(product => product.isNew).slice(0, 4);
+    } catch (error) {
+      console.error("Error filtering new arrivals:", error);
+      return [];
+    }
+  }, [products]);
   
-  const bestsellers = useMemo(() => 
-    products.filter((product, index) => index >= 8 && index < 12), [products]
-  );
+  const bestsellers = useMemo(() => {
+    try {
+      if (!products || products.length === 0) return [];
+      return products.filter((product, index) => index >= 8 && index < 12);
+    } catch (error) {
+      console.error("Error filtering bestsellers:", error);
+      return [];
+    }
+  }, [products]);
 
   return (
     <section className="py-16 bg-morocco-sand/30">
@@ -65,25 +91,43 @@ const FeaturedProducts = () => {
           
           <TabsContent value="trending" className="animate-fade-in">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {trendingProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {trendingProducts.length > 0 ? (
+                trendingProducts.map((product) => (
+                  <ErrorBoundary key={product.id}>
+                    <ProductCard key={product.id} product={product} />
+                  </ErrorBoundary>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8">No trending products available</div>
+              )}
             </div>
           </TabsContent>
           
           <TabsContent value="new" className="animate-fade-in">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {newArrivals.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {newArrivals.length > 0 ? (
+                newArrivals.map((product) => (
+                  <ErrorBoundary key={product.id}>
+                    <ProductCard key={product.id} product={product} />
+                  </ErrorBoundary>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8">No new arrivals available</div>
+              )}
             </div>
           </TabsContent>
           
           <TabsContent value="bestsellers" className="animate-fade-in">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {bestsellers.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {bestsellers.length > 0 ? (
+                bestsellers.map((product) => (
+                  <ErrorBoundary key={product.id}>
+                    <ProductCard key={product.id} product={product} />
+                  </ErrorBoundary>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8">No bestsellers available</div>
+              )}
             </div>
           </TabsContent>
         </Tabs>

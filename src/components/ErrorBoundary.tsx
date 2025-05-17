@@ -31,7 +31,9 @@ export class ErrorBoundary extends Component<Props, State> {
       return this.props.fallback || (
         <div className="p-8 text-center">
           <h2 className="text-xl font-bold text-morocco-navy mb-2">Something went wrong</h2>
-          <p className="text-gray-600 mb-4">Please try refreshing the page</p>
+          <p className="text-gray-600 mb-4">
+            {this.state.error ? `Error: ${this.state.error.message}` : "Please try refreshing the page"}
+          </p>
           <button 
             onClick={() => window.location.reload()} 
             className="px-4 py-2 bg-morocco-navy text-white rounded"

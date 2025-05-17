@@ -34,7 +34,11 @@ const ProductCard = ({
   
   // Add debug logging
   useEffect(() => {
-    console.log("ProductCard rendered:", product.name);
+    try {
+      console.log("ProductCard rendered:", product.name);
+    } catch (error) {
+      console.error("Error in ProductCard useEffect:", error);
+    }
   }, [product.name]);
   
   // Calculate discount percentage if there's an original price
@@ -43,11 +47,26 @@ const ProductCard = ({
     : 0;
 
   const handleAddToCart = () => {
-    if (!product.inStock) return;
-    
-    addProduct(product);
-    toast.success(`${product.name} ${t('addToBag')}`);
+    try {
+      if (!product.inStock) return;
+      
+      addProduct(product);
+      toast.success(`${product.name} ${t('addToBag')}`);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      toast.error("Could not add product to cart");
+    }
   };
+
+  // Handle case where product might be invalid
+  if (!product || !product.id) {
+    console.error("Invalid product data:", product);
+    return (
+      <div className="bg-white rounded-lg overflow-hidden shadow-sm p-4 text-center text-gray-500">
+        Product data is not available
+      </div>
+    );
+  }
 
   return (
     <div className={`group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow ${featured ? 'border border-gray-100' : ''}`}>
@@ -76,6 +95,11 @@ const ProductCard = ({
           src={product.image}
           alt={product.name}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            console.error("Image failed to load:", product.image);
+            const target = e.target as HTMLImageElement;
+            target.src = "https://placehold.co/400x400?text=Image+Not+Found";
+          }}
         />
       </Link>
       

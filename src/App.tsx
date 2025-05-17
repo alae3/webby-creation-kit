@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,11 +27,16 @@ import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 
+// Create query client with enhanced error handling
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
+      // Add better error handling
+      onError: (error) => {
+        console.error("Query error:", error);
+      },
     },
   },
 });
@@ -53,9 +57,13 @@ const LanguageSetup = () => {
   const { language } = useLanguageStore();
   
   useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-    console.log("Language setup complete:", language);
+    try {
+      document.documentElement.lang = language;
+      document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+      console.log("Language setup complete:", language);
+    } catch (error) {
+      console.error("Error in language setup:", error);
+    }
   }, [language]);
   
   return null;
@@ -63,11 +71,26 @@ const LanguageSetup = () => {
 
 const App = () => {
   useEffect(() => {
-    console.log("App component rendered");
+    try {
+      console.log("App component rendered");
+    } catch (error) {
+      console.error("Error in App component:", error);
+    }
   }, []);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary fallback={
+      <div className="p-8 text-center">
+        <h2 className="text-xl font-bold mb-4">Sorry, something went wrong with the application</h2>
+        <p className="mb-4">Please try refreshing your browser</p>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="px-4 py-2 bg-blue-600 text-white rounded"
+        >
+          Refresh Now
+        </button>
+      </div>
+    }>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
@@ -75,7 +98,22 @@ const App = () => {
           <BrowserRouter>
             <LanguageSetup />
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={
+                <ErrorBoundary fallback={
+                  <div className="p-8 text-center">
+                    <h2 className="text-xl font-bold mb-4">Sorry, the home page couldn't load properly</h2>
+                    <p className="mb-4">This might be due to a temporary issue. Please try refreshing.</p>
+                    <button 
+                      onClick={() => window.location.reload()} 
+                      className="px-4 py-2 bg-blue-600 text-white rounded"
+                    >
+                      Refresh Now
+                    </button>
+                  </div>
+                }>
+                  <Index />
+                </ErrorBoundary>
+              } />
               <Route path="/girls" element={<Girls />} />
               <Route path="/boys" element={<Boys />} />
               <Route path="/baby" element={<Baby />} />
