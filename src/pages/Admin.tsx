@@ -70,6 +70,8 @@ const productSchema = z.object({
   isNew: z.boolean().optional(),
   isSale: z.boolean().optional(),
   rating: z.coerce.number().min(0).max(5).default(5),
+  inStock: z.boolean().default(true),
+  stockQuantity: z.coerce.number().min(0).default(10),
 });
 
 // Website content schema
@@ -152,7 +154,9 @@ const Admin = () => {
       category: "",
       rating: 5,
       isNew: false,
-      isSale: false
+      isSale: false,
+      inStock: true,
+      stockQuantity: 10
     }
   });
 
@@ -191,6 +195,8 @@ const Admin = () => {
         image: data.image,
         rating: data.rating,
         category: data.category,
+        inStock: data.inStock,
+        stockQuantity: data.stockQuantity,
         // Optional fields
         originalPrice: data.originalPrice,
         isNew: data.isNew,
@@ -254,7 +260,9 @@ const Admin = () => {
       category: product.category || "",
       isNew: product.isNew,
       isSale: product.isSale,
-      rating: product.rating
+      rating: product.rating,
+      inStock: product.inStock,
+      stockQuantity: product.stockQuantity
     });
     setCurrentTab("new");
   };
@@ -506,6 +514,7 @@ const Admin = () => {
                             <TableHead>Name</TableHead>
                             <TableHead>Category</TableHead>
                             <TableHead>Price</TableHead>
+                            <TableHead>Stock</TableHead>
                             <TableHead>Actions</TableHead>
                           </TableRow>
                         </TableHeader>
@@ -527,6 +536,15 @@ const Admin = () => {
                                   <span className="line-through text-gray-500 ml-2">
                                     {product.originalPrice} MAD
                                   </span>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                {product.inStock ? (
+                                  <span className={product.stockQuantity > 5 ? "text-green-600" : "text-amber-600"}>
+                                    {product.stockQuantity} in stock
+                                  </span>
+                                ) : (
+                                  <span className="text-red-500">Out of stock</span>
                                 )}
                               </TableCell>
                               <TableCell>
@@ -957,6 +975,46 @@ const Admin = () => {
                             </FormItem>
                           )}
                         />
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <FormField
+                            control={productForm.control}
+                            name="inStock"
+                            render={({ field }) => (
+                              <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border rounded-md">
+                                <FormControl>
+                                  <input
+                                    type="checkbox"
+                                    checked={field.value}
+                                    onChange={field.onChange}
+                                    className="h-4 w-4 mt-1"
+                                  />
+                                </FormControl>
+                                <div className="space-y-1 leading-none">
+                                  <FormLabel>In Stock</FormLabel>
+                                </div>
+                              </FormItem>
+                            )}
+                          />
+                          
+                          <FormField
+                            control={productForm.control}
+                            name="stockQuantity"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel>Stock Quantity</FormLabel>
+                                <FormControl>
+                                  <Input 
+                                    type="number" 
+                                    {...field} 
+                                    disabled={!productForm.getValues().inStock}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
                         
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                           <FormField
