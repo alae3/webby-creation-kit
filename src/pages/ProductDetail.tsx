@@ -13,7 +13,7 @@ import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 const ProductDetail = () => {
   const { productId } = useParams();
   const { products, updateProduct } = useProductStore();
-  const { addItem } = useCartStore();
+  const { addProduct } = useCartStore(); // Changed from addItem to addProduct
 
   // State for editing mode
   const [isEditing, setIsEditing] = useState(false);
@@ -41,7 +41,7 @@ const ProductDetail = () => {
         return;
       }
       
-      addItem(product);
+      addProduct(product); // Changed from addItem to addProduct
       toast.success(`${product.name} added to your bag!`);
     }
   };
