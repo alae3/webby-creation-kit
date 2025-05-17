@@ -1,14 +1,16 @@
 
 import { Star } from 'lucide-react';
 import { useTestimonialStore } from '@/store/testimonialStore';
+import { useLanguageStore } from '@/store/languageStore';
 
 const Testimonials = () => {
   const { testimonials } = useTestimonialStore();
+  const { t } = useLanguageStore();
   
   return (
     <div className="py-12 bg-morocco-cream/30">
       <div className="container-custom">
-        <h2 className="text-3xl font-bold text-center text-morocco-navy mb-8">What Our Customers Say</h2>
+        <h2 className="text-3xl font-bold text-center text-morocco-navy mb-8">{t('testimonialTitle')}</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (

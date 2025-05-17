@@ -51,6 +51,7 @@ const translations = {
     onlyFewLeft: 'Only {count} left',
     
     // Testimonials
+    testimonialTitle: 'What Our Customers Say',
     testimonialManagement: 'Testimonial Management',
     addNewTestimonial: 'Add New Testimonial',
     image: 'Image',
@@ -182,7 +183,12 @@ const translations = {
     faqCare2Question: 'Can I iron NajihKids clothing?',
     faqCare2Answer: 'Yes, most of our clothing can be ironed on a low to medium setting. For garments with embroidery or special details, we recommend ironing inside out to protect these features. Always check the care label for specific instructions.',
     faqCare3Question: 'How can I maintain the quality of the clothes?',
-    faqCare3Answer: 'To maintain the quality of your NajihKids clothing, we recommend washing in cold water, avoiding bleach or harsh detergents, and air-drying when possible. For stain removal, treat the stain promptly with a gentle stain remover before washing.'
+    faqCare3Answer: 'To maintain the quality of your NajihKids clothing, we recommend washing in cold water, avoiding bleach or harsh detergents, and air-drying when possible. For stain removal, treat the stain promptly with a gentle stain remover before washing.',
+    
+    // NotFound
+    notFoundTitle: '404',
+    notFoundMessage: 'Oops! Page not found',
+    returnToHome: 'Return to Home'
   },
   ar: {
     // Navbar
@@ -223,6 +229,7 @@ const translations = {
     onlyFewLeft: 'بقي {count} فقط',
     
     // Testimonials
+    testimonialTitle: 'ماذا يقول عملاؤنا',
     testimonialManagement: 'إدارة الشهادات',
     addNewTestimonial: 'إضافة شهادة جديدة',
     image: 'صورة',
@@ -354,7 +361,12 @@ const translations = {
     faqCare2Question: 'هل يمكنني كي ملابس ناجح كيدز؟',
     faqCare2Answer: 'نعم، يمكن كي معظم ملابسنا على إعداد منخفض إلى متوسط. بالنسبة للملابس ذات التطريز أو التفاصيل الخاصة، نوصي بالكي من الداخل للخارج لحماية هذه الميزات. تحقق دائمًا من ملصق العناية للحصول على تعليمات محددة.',
     faqCare3Question: 'كيف يمكنني الحفاظ على جودة الملابس؟',
-    faqCare3Answer: 'للحفاظ على جودة ملابس ناجح كيدز، نوصي بالغسيل بالماء البارد، وتجنب المبيض أو المنظفات القاسية، والتجفيف الهوائي عند الإمكان. لإزالة البقع، عالج البقعة فورًا بمزيل بقع لطيف قبل الغسيل.'
+    faqCare3Answer: 'للحفاظ على جودة ملابس ناجح كيدز، نوصي بالغسيل بالماء البارد، وتجنب المبيض أو المنظفات القاسية، والتجفيف الهوائي عند الإمكان. لإزالة البقع، عالج البقعة فورًا بمزيل بقع لطيف قبل الغسيل.',
+    
+    // NotFound
+    notFoundTitle: '404',
+    notFoundMessage: 'عذراً! الصفحة غير موجودة',
+    returnToHome: 'العودة إلى الصفحة الرئيسية'
   },
   fr: {
     // Navbar
@@ -395,6 +407,7 @@ const translations = {
     onlyFewLeft: 'Seulement {count} restants',
     
     // Testimonials
+    testimonialTitle: 'Ce Que Disent Nos Clients',
     testimonialManagement: 'Gestion des Témoignages',
     addNewTestimonial: 'Ajouter un Nouveau Témoignage',
     image: 'Image',
@@ -526,7 +539,12 @@ const translations = {
     faqCare2Question: 'Puis-je repasser les vêtements NajihKids?',
     faqCare2Answer: 'Oui, la plupart de nos vêtements peuvent être repassés à un réglage faible à moyen. Pour les vêtements avec broderie ou détails spéciaux, nous recommandons de repasser à l\'envers pour protéger ces caractéristiques. Vérifiez toujours l\'étiquette d\'entretien pour des instructions spécifiques.',
     faqCare3Question: 'Comment puis-je maintenir la qualité des vêtements?',
-    faqCare3Answer: 'Pour maintenir la qualité de vos vêtements NajihKids, nous recommandons de les laver à l\'eau froide, d\'éviter l\'eau de Javel ou les détergents agressifs, et de les sécher à l\'air libre quand c\'est possible. Pour l\'élimination des taches, traitez la tache rapidement avec un détachant doux avant le lavage.'
+    faqCare3Answer: 'Pour maintenir la qualité de vos vêtements NajihKids, nous recommandons de les laver à l\'eau froide, d\'éviter l\'eau de Javel ou les détergents agressifs, et de les sécher à l\'air libre quand c\'est possible. Pour l\'élimination des taches, traitez la tache rapidement avec un détachant doux avant le lavage.',
+    
+    // NotFound
+    notFoundTitle: '404',
+    notFoundMessage: 'Oups! Page non trouvée',
+    returnToHome: 'Retourner à l\'accueil'
   }
 };
 
