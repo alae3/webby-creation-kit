@@ -20,7 +20,9 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+      
       addProduct: (product: Product) => {
+        console.log("Adding product to cart:", product.name);
         set((state) => {
           const existingItem = state.items.find(item => item.id === product.id);
           
@@ -41,11 +43,13 @@ export const useCartStore = create<CartStore>()(
           }
         });
       },
+      
       removeItem: (productId: number) => {
         set((state) => ({
           items: state.items.filter(item => item.id !== productId)
         }));
       },
+      
       updateQuantity: (productId: number, quantity: number) => {
         set((state) => ({
           items: state.items.map(item => 
@@ -55,9 +59,11 @@ export const useCartStore = create<CartStore>()(
           )
         }));
       },
+      
       clearCart: () => {
         set({ items: [] });
       },
+      
       getTotal: () => {
         return get().items.reduce((total, item) => total + (item.price * item.quantity), 0);
       }
