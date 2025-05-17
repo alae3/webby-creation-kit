@@ -47,47 +47,54 @@ const LanguageSetup = () => {
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    console.log("Language setup complete:", language);
   }, [language]);
   
   return null;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <LanguageSetup />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/girls" element={<Girls />} />
-          <Route path="/boys" element={<Boys />} />
-          <Route path="/baby" element={<Baby />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:productId" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/track-order" element={<TrackOrder />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          } />
-          <Route path="/shipping" element={<ShippingReturns />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/sustainability" element={<Sustainability />} />
-          <Route path="/stores" element={<Stores />} />
-          <Route path="/careers" element={<Careers />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  useEffect(() => {
+    console.log("App component rendered");
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <LanguageSetup />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/girls" element={<Girls />} />
+            <Route path="/boys" element={<Boys />} />
+            <Route path="/baby" element={<Baby />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/track-order" element={<TrackOrder />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            } />
+            <Route path="/shipping" element={<ShippingReturns />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/sustainability" element={<Sustainability />} />
+            <Route path="/stores" element={<Stores />} />
+            <Route path="/careers" element={<Careers />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

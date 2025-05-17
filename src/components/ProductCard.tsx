@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { useCartStore } from '@/store/cartStore';
 import { Button } from '@/components/ui/button';
 import { useLanguageStore } from '@/store/languageStore';
+import { useEffect } from 'react';
 
 export interface Product {
   id: number;
@@ -30,6 +31,11 @@ const ProductCard = ({
 }) => {
   const { addProduct } = useCartStore();
   const { t } = useLanguageStore();
+  
+  // Add debug logging
+  useEffect(() => {
+    console.log("ProductCard rendered:", product.name);
+  }, [product.name]);
   
   // Calculate discount percentage if there's an original price
   const discountPercentage = product.originalPrice

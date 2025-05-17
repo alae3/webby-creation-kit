@@ -1,5 +1,5 @@
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import ProductCard from './ProductCard';
@@ -9,6 +9,11 @@ import { useProductStore } from '@/store/productStore';
 const FeaturedProducts = () => {
   const [activeTab, setActiveTab] = useState("trending");
   const { products } = useProductStore();
+  
+  // Add debugging
+  useEffect(() => {
+    console.log("FeaturedProducts rendered with", products.length, "products");
+  }, [products.length]);
   
   // Filter products based on categories
   const trendingProducts = useMemo(() => 
