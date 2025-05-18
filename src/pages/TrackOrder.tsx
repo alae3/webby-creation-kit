@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useOrderStore, Order } from "@/store/orderStore";
-import { Package, CheckCircle, Clock, AlertCircle, XCircle } from "lucide-react";
+import { Package, CheckCircle, Clock, AlertCircle, XCircle, Truck } from "lucide-react";
 
 const TrackOrder = () => {
   const [searchParams] = useSearchParams();
@@ -133,6 +133,30 @@ const TrackOrder = () => {
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Shipping Information */}
+                  {trackedOrder.shippingMethod && (
+                    <div className="p-4 border rounded-lg bg-gray-50">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Truck className="h-5 w-5 text-morocco-navy" />
+                        <h3 className="font-medium text-lg">Shipping Information</h3>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-gray-500">Shipping Method</p>
+                          <p className="font-medium">{trackedOrder.shippingMethod}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Shipping Cost</p>
+                          <p className="font-medium">
+                            {trackedOrder.shippingCost === 0 
+                              ? "Free" 
+                              : `${trackedOrder.shippingCost} MAD`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="flex items-center gap-6 p-6 border rounded-lg">
                     {getStatusIcon(trackedOrder.status)}

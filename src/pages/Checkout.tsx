@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCartStore } from "@/store/cartStore";
@@ -7,6 +6,15 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useOrderStore } from "@/store/orderStore";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+
+// Shipping options with costs
+const shippingOptions = [
+  { id: "standard", name: "Standard Shipping", cost: 30, time: "3-5 business days" },
+  { id: "express", name: "Express Shipping", cost: 60, time: "1-2 business days" },
+  { id: "free", name: "Free Shipping", cost: 0, time: "5-7 business days" },
+];
 
 const Checkout = () => {
   const { items, getTotal, clearCart } = useCartStore();
@@ -20,23 +28,40 @@ const Checkout = () => {
     zipCode: "",
     phone: "",
   });
+  const [selectedShipping, setSelectedShipping] = useState(shippingOptions[0].id);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Get selected shipping option
+  const getSelectedShippingOption = () => {
+    return shippingOptions.find(option => option.id === selectedShipping) || shippingOptions[0];
+  };
+
+  // Calculate total with shipping
+  const calculateTotal = () => {
+    const subtotal = getTotal();
+    const shippingCost = getSelectedShippingOption().cost;
+    return subtotal + shippingCost;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const shippingOption = getSelectedShippingOption();
     
     // Create a new order
     const newOrder = addOrder({
       customer: formData.fullName,
       date: new Date().toISOString().split('T')[0], // Format: YYYY-MM-DD
-      total: getTotal(),
+      total: calculateTotal(),
       status: "pending",
       items: items.map(item => `${item.name} (x${item.quantity})`),
-      contact: formData.email || formData.phone
+      contact: formData.email || formData.phone,
+      shippingMethod: shippingOption.name,
+      shippingCost: shippingOption.cost
     });
     
     // Clear cart and redirect to track order page
@@ -158,6 +183,25 @@ const Checkout = () => {
                       />
                     </div>
                     
+                    {/* Shipping Method Selection */}
+                    <div className="mt-6">
+                      <h3 className="text-lg font-medium mb-3">Shipping Method</h3>
+                      <RadioGroup value={selectedShipping} onValueChange={setSelectedShipping} className="space-y-3">
+                        {shippingOptions.map((option) => (
+                          <div key={option.id} className="flex items-center space-x-2 border p-3 rounded-md">
+                            <RadioGroupItem value={option.id} id={`shipping-${option.id}`} />
+                            <Label htmlFor={`shipping-${option.id}`} className="flex-1 cursor-pointer">
+                              <div className="flex justify-between">
+                                <span className="font-medium">{option.name}</span>
+                                <span className="font-medium">{option.cost === 0 ? 'Free' : `${option.cost} MAD`}</span>
+                              </div>
+                              <p className="text-gray-500 text-sm">{option.time}</p>
+                            </Label>
+                          </div>
+                        ))}
+                      </RadioGroup>
+                    </div>
+                    
                     <Button type="submit" className="w-full mt-6 bg-morocco-navy hover:bg-morocco-terracotta">
                       Place Order
                     </Button>
@@ -189,14 +233,18 @@ const Checkout = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Shipping</span>
-                    <span>Free</span>
+                    <span>
+                      {getSelectedShippingOption().cost === 0 
+                        ? "Free" 
+                        : `${getSelectedShippingOption().cost.toFixed(2)} MAD`}
+                    </span>
                   </div>
                 </div>
                 
                 <div className="border-t pt-2 mb-6">
                   <div className="flex justify-between font-medium text-lg">
                     <span>Total</span>
-                    <span className="text-morocco-terracotta">{getTotal().toFixed(2)} MAD</span>
+                    <span className="text-morocco-terracotta">{calculateTotal().toFixed(2)} MAD</span>
                   </div>
                 </div>
               </div>
