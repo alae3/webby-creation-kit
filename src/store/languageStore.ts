@@ -105,7 +105,6 @@ const translations = {
     itemsFound: 'items found',
     noProductsFound: 'No products found matching your search.',
     viewAllNewArrivals: 'View All New Arrivals',
-    exploreMoreCollections: 'Explore More Collections',
     
     // Sale
     saleItems: 'Sale Items',
@@ -612,4 +611,3 @@ export const useLanguageStore = create<LanguageStore>()(
     }
   )
 );
-
