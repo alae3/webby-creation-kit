@@ -3,14 +3,23 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { usePageContentStore } from "@/store/pageContentStore";
 import { useLanguageStore } from "@/store/languageStore";
+import { useContentStore } from "@/store/contentStore";
+import { useEffect } from "react";
 
 const ShippingReturns = () => {
   const { pages } = usePageContentStore();
   const { language, t } = useLanguageStore();
+  const { lastUpdated, refreshContent } = useContentStore();
+  
+  // Effect to refresh content when component mounts
+  useEffect(() => {
+    refreshContent();
+    console.log("Shipping page - content refreshed at:", new Date(lastUpdated).toISOString());
+  }, [refreshContent, lastUpdated]);
   
   return (
     <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <Navbar />
+      <Navbar key={`nav-${lastUpdated}`} />
       
       <main className="flex-1">
         <div className="container-custom py-12">
@@ -41,7 +50,7 @@ const ShippingReturns = () => {
         </div>
       </main>
       
-      <Footer />
+      <Footer key={`footer-${lastUpdated}`} />
     </div>
   );
 };

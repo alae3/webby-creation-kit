@@ -25,8 +25,10 @@ export interface WebsiteImages {
 interface ContentStore {
   textContent: WebsiteContent;
   images: WebsiteImages;
+  lastUpdated: number; // Timestamp to track updates
   updateTextContent: (content: Partial<WebsiteContent>) => void;
   updateImage: (key: keyof WebsiteImages, url: string) => void;
+  refreshContent: () => void; // Method to force a refresh
 }
 
 // Default website content
@@ -51,22 +53,34 @@ const defaultImages: WebsiteImages = {
 
 export const useContentStore = create<ContentStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       textContent: defaultTextContent,
       images: defaultImages,
+      lastUpdated: Date.now(),
       updateTextContent: (content) => {
         set((state) => ({
-          textContent: { ...state.textContent, ...content }
+          textContent: { ...state.textContent, ...content },
+          lastUpdated: Date.now() // Update timestamp
         }));
+        console.log("Content updated:", content);
       },
       updateImage: (key, url) => {
         set((state) => ({
-          images: { ...state.images, [key]: url }
+          images: { ...state.images, [key]: url },
+          lastUpdated: Date.now() // Update timestamp
         }));
+        console.log("Image updated:", key, url);
+      },
+      refreshContent: () => {
+        // Force a refresh by updating the timestamp without changing content
+        // This will cause components to re-render when they use this value
+        set({ lastUpdated: Date.now() });
+        console.log("Content store refreshed at:", new Date().toISOString());
       }
     }),
     {
       name: 'content-storage', // unique name for the localStorage key
+      version: 1, // Adding versioning to track storage schema changes
     }
   )
 );
