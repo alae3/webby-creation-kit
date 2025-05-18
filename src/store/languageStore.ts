@@ -297,7 +297,6 @@ const translations = {
     itemsFound: 'عنصر تم العثور عليه',
     noProductsFound: 'لم يتم العثور على منتجات تطابق بحثك.',
     viewAllNewArrivals: 'عرض جميع الوصولات الجديدة',
-    exploreMoreCollections: 'استكشف مجموعتنا الكاملة من ملابس الأطفال وإكسسواراتهم عالية الجودة.',
     
     // Sale
     saleItems: 'عناصر التخفيضات',
@@ -389,7 +388,6 @@ const translations = {
     newestFirst: 'الأحدث أولاً',
     showing: 'عرض',
     products: 'منتجات',
-    noProductsFound: 'لم يتم العثور على منتجات',
     tryDifferentSearch: 'جرب مصطلح بحث مختلف أو تصفح فئاتنا.',
     tryDifferentCategory: 'الرجاء تجربة فئة مختلفة أو التحقق مرة أخرى لاحقًا.',
     
@@ -582,7 +580,6 @@ const translations = {
     newestFirst: 'Plus récent d\'abord',
     showing: 'Affichage de',
     products: 'produits',
-    noProductsFound: 'Aucun produit trouvé',
     tryDifferentSearch: 'Essayez un terme de recherche différent ou parcourez nos catégories.',
     tryDifferentCategory: 'Veuillez essayer une catégorie différente ou vérifier plus tard.',
     
