@@ -1,5 +1,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
+import { RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   children: ReactNode;
@@ -29,17 +31,25 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div className="p-8 text-center">
-          <h2 className="text-xl font-bold text-morocco-navy mb-2">Something went wrong</h2>
-          <p className="text-gray-600 mb-4">
-            {this.state.error ? `Error: ${this.state.error.message}` : "Please try refreshing the page"}
-          </p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="px-4 py-2 bg-morocco-navy text-white rounded"
-          >
-            Refresh Page
-          </button>
+        <div className="p-8 text-center min-h-[50vh] flex flex-col items-center justify-center">
+          <div className="max-w-md mx-auto">
+            <h2 className="text-2xl font-bold text-morocco-navy mb-3">We're having trouble loading this content</h2>
+            <p className="text-gray-600 mb-6">
+              {this.state.error 
+                ? `There was a problem with this page: ${this.state.error.message}` 
+                : "Please try refreshing the page to fix this issue"}
+            </p>
+            <Button 
+              onClick={() => {
+                this.setState({ hasError: false });
+                window.location.reload();
+              }}
+              className="flex items-center gap-2"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Refresh Page
+            </Button>
+          </div>
         </div>
       );
     }

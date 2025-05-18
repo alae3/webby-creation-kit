@@ -6,14 +6,15 @@ import { Link } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { useProductStore } from "@/store/productStore";
 import { useLanguageStore } from "@/store/languageStore";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-const Baby = () => {
+const BabyContent = () => {
   const { products } = useProductStore();
-  const { t } = useLanguageStore();
+  const { t, language } = useLanguageStore();
   const babyProducts = products.filter(product => product.category === "baby");
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
@@ -39,6 +40,14 @@ const Baby = () => {
       
       <Footer />
     </div>
+  );
+};
+
+const Baby = () => {
+  return (
+    <ErrorBoundary>
+      <BabyContent />
+    </ErrorBoundary>
   );
 };
 

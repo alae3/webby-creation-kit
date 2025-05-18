@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { useProductStore } from "@/store/productStore";
 import { useLanguageStore } from "@/store/languageStore";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-const Girls = () => {
+const GirlsContent = () => {
   const { products } = useProductStore();
   const { t, language } = useLanguageStore();
   const girlsProducts = products.filter(product => product.category === "girls");
@@ -39,6 +40,14 @@ const Girls = () => {
       
       <Footer />
     </div>
+  );
+};
+
+const Girls = () => {
+  return (
+    <ErrorBoundary>
+      <GirlsContent />
+    </ErrorBoundary>
   );
 };
 
