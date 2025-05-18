@@ -19,9 +19,9 @@ const BabyContent = () => {
       
       <main className="flex-1">
         <div className="container-custom py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">{t('babyCollection')}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">{t('babyCollection') || 'Baby Collection'}</h1>
           <p className="text-lg text-morocco-navy/70 mb-8">
-            {t('babyDescription')}
+            {t('babyDescription') || 'Discover our range of comfortable and stylish clothing for babies.'}
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -32,7 +32,7 @@ const BabyContent = () => {
           
           <div className="text-center mt-8">
             <Button asChild>
-              <Link to="/products">{t('viewAllProducts')}</Link>
+              <Link to="/products">{t('viewAllProducts') || 'View All Products'}</Link>
             </Button>
           </div>
         </div>
