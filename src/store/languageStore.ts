@@ -392,7 +392,6 @@ const translations = {
     noProductsFound: 'لم يتم العثور على منتجات',
     tryDifferentSearch: 'جرب مصطلح بحث مختلف أو تصفح فئاتنا.',
     tryDifferentCategory: 'الرجاء تجربة فئة مختلفة أو التحقق مرة أخرى لاحقًا.',
-    exploreMoreCollections: 'استكشف مجموعتنا الكاملة من ملابس الأطفال وإكسسواراتهم عالية الجودة.',
     
     // NotFound
     notFoundTitle: '404',
@@ -586,7 +585,6 @@ const translations = {
     noProductsFound: 'Aucun produit trouvé',
     tryDifferentSearch: 'Essayez un terme de recherche différent ou parcourez nos catégories.',
     tryDifferentCategory: 'Veuillez essayer une catégorie différente ou vérifier plus tard.',
-    exploreMoreCollections: 'Explorez notre collection complète de vêtements et accessoires pour enfants de haute qualité.',
     
     // NotFound
     notFoundTitle: '404',
