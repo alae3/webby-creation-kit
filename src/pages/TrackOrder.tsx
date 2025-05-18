@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -39,6 +39,13 @@ const TrackOrder = () => {
     } else {
       setTrackedOrder(null);
       toast.error("Order not found. Please check the order number and try again.");
+    }
+  };
+
+  // Handle Enter key press in the input field
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleTrackOrder();
     }
   };
 
@@ -92,6 +99,7 @@ const TrackOrder = () => {
                   placeholder="Enter your order number (e.g., NK-10001)"
                   value={orderNumber}
                   onChange={(e) => setOrderNumber(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="flex-1"
                 />
                 <Button 
