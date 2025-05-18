@@ -105,6 +105,7 @@ const translations = {
     itemsFound: 'items found',
     noProductsFound: 'No products found matching your search.',
     viewAllNewArrivals: 'View All New Arrivals',
+    exploreMoreCollections: 'Explore our complete collection of high-quality children\'s clothing and accessories.',
     
     // Sale
     saleItems: 'Sale Items',
@@ -198,7 +199,6 @@ const translations = {
     products: 'products',
     tryDifferentSearch: 'Try a different search term or browse our categories.',
     tryDifferentCategory: 'Please try a different category or check back later.',
-    exploreMoreCollections: 'Explore our complete collection of high-quality children\'s clothing and accessories.',
     
     // NotFound
     notFoundTitle: '404',
@@ -297,7 +297,7 @@ const translations = {
     itemsFound: 'عنصر تم العثور عليه',
     noProductsFound: 'لم يتم العثور على منتجات تطابق بحثك.',
     viewAllNewArrivals: 'عرض جميع الوصولات الجديدة',
-    exploreMoreCollections: 'استكشف المزيد من المجموعات',
+    exploreMoreCollections: 'استكشف مجموعتنا الكاملة من ملابس الأطفال وإكسسواراتهم عالية الجودة.',
     
     // Sale
     saleItems: 'عناصر التخفيضات',
@@ -491,7 +491,7 @@ const translations = {
     itemsFound: 'articles trouvés',
     noProductsFound: 'Aucun produit correspondant à votre recherche n\'a été trouvé.',
     viewAllNewArrivals: 'Voir Toutes les Nouveautés',
-    exploreMoreCollections: 'Explorer Plus de Collections',
+    exploreMoreCollections: 'Explorez notre collection complète de vêtements et accessoires pour enfants de haute qualité.',
     
     // Sale
     saleItems: 'Articles en Solde',
