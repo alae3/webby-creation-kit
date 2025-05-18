@@ -1,3 +1,4 @@
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -196,7 +197,6 @@ const translations = {
     newestFirst: 'Newest First',
     showing: 'Showing',
     products: 'products',
-    noProductsFound: 'No products found',
     tryDifferentSearch: 'Try a different search term or browse our categories.',
     tryDifferentCategory: 'Please try a different category or check back later.',
     exploreMoreCollections: 'Explore our complete collection of high-quality children\'s clothing and accessories.',
@@ -569,7 +569,7 @@ const translations = {
     faqCare1Question: 'Comment dois-je laver les vêtements NajihKids?',
     faqCare1Answer: 'Nous recommandons de laver nos vêtements en machine à l\'eau froide avec des couleurs similaires et d\'utiliser un cycle délicat. Évitez d\'utiliser de l\'eau de Javel ou des détergents agressifs. Pour des instructions d\'entretien détaillées pour des articles spécifiques, veuillez vous référer à l\'étiquette d\'entretien sur chaque vêtement.',
     faqCare2Question: 'Puis-je repasser les vêtements NajihKids?',
-    faqCare2Answer: 'Oui, la plupart de nos vêtements peuvent être repassés à un réglage faible à moyen. Pour les vêtements avec broderie ou détails sp��ciaux, nous recommandons de repasser à l\'envers pour protéger ces caractéristiques. Vérifiez toujours l\'étiquette d\'entretien pour des instructions spécifiques.',
+    faqCare2Answer: 'Oui, la plupart de nos vêtements peuvent être repassés à un réglage faible à moyen. Pour les vêtements avec broderie ou détails spéciaux, nous recommandons de repasser à l\'envers pour protéger ces caractéristiques. Vérifiez toujours l\'étiquette d\'entretien pour des instructions spécifiques.',
     faqCare3Question: 'Comment puis-je maintenir la qualité des vêtements?',
     faqCare3Answer: 'Pour maintenir la qualité de vos vêtements NajihKids, nous recommandons de les laver à l\'eau froide, d\'éviter l\'eau de Javel ou les détergents agressifs, et de les sécher à l\'air libre quand c\'est possible. Pour l\'élimination des taches, traitez la tache rapidement avec un détachant doux avant le lavage.',
     
@@ -612,3 +612,4 @@ export const useLanguageStore = create<LanguageStore>()(
     }
   )
 );
+
