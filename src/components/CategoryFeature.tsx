@@ -30,6 +30,14 @@ const CategoryFeature = () => {
     console.log(`Replaced failed ${category} image with fallback`);
   };
   
+  // Function to handle navigation clicks
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  
   // Create categories after translation is loaded to ensure they use the right text
   const categories = [
     {
@@ -75,6 +83,7 @@ const CategoryFeature = () => {
               to={category.link} 
               key={category.id}
               className="group overflow-hidden relative rounded-xl moroccan-shadow hover-scale transition-all duration-500 aspect-[5/6] block"
+              onClick={handleNavigationClick}
             >
               <div className="absolute inset-0 moroccan-pattern-bg opacity-10 mix-blend-overlay z-10"></div>
               <img 

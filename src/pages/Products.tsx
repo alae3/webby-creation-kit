@@ -72,6 +72,14 @@ const Products = () => {
     setCategoryFilter(value);
   };
 
+  // Function to handle navigation clicks
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
@@ -145,11 +153,11 @@ const Products = () => {
                   ? t('tryDifferentSearch') 
                   : t('tryDifferentCategory')}
               </p>
-              <Button asChild variant="outline" className="mr-2">
-                <Link to="/products">{t('viewAllProducts')}</Link>
+              <Button asChild variant="outline" className="mr-2" onClick={handleNavigationClick}>
+                <Link to="/products" onClick={handleNavigationClick}>{t('viewAllProducts')}</Link>
               </Button>
-              <Button asChild>
-                <Link to="/">{t('returnToHome')}</Link>
+              <Button asChild onClick={handleNavigationClick}>
+                <Link to="/" onClick={handleNavigationClick}>{t('returnToHome')}</Link>
               </Button>
             </div>
           )}
