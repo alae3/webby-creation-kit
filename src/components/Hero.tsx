@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -68,6 +69,14 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Function to handle button clicks for scrolling to top
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="relative h-[80vh] md:h-[85vh] lg:h-[90vh] overflow-hidden">
       {/* Decorative pattern overlay */}
@@ -118,8 +127,9 @@ const Hero = () => {
                 <Button 
                   className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md group"
                   asChild
+                  onClick={handleNavigationClick}
                 >
-                  <Link to={slide.link}>
+                  <Link to={slide.link} onClick={handleNavigationClick}>
                     {t(slide.cta) || slide.cta}
                     <svg 
                       className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" 
@@ -142,8 +152,9 @@ const Hero = () => {
                   variant="outline" 
                   className="border-white hover:bg-white/10 text-white px-8 py-6 text-lg"
                   asChild
+                  onClick={handleNavigationClick}
                 >
-                  <Link to="/products">
+                  <Link to="/products" onClick={handleNavigationClick}>
                     {t('viewAll') || 'View All'}
                   </Link>
                 </Button>

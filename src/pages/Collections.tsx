@@ -16,6 +16,14 @@ const CollectionsContent = () => {
   // Featured products (we'll show the first 4)
   const featuredProducts = products.slice(0, 4);
 
+  // Function to handle navigation clicks
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
@@ -43,8 +51,8 @@ const CollectionsContent = () => {
             </div>
             
             <div className="text-center mt-8">
-              <Button asChild>
-                <Link to="/products">{t('viewAllProducts') || 'View All Products'}</Link>
+              <Button asChild onClick={handleNavigationClick}>
+                <Link to="/products" onClick={handleNavigationClick}>{t('viewAllProducts') || 'View All Products'}</Link>
               </Button>
             </div>
           </div>

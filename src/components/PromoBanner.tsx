@@ -48,6 +48,14 @@ const PromoBanner = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Function to handle button clicks for scrolling to top
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   // Format time values to always show two digits
   const formatTime = (time: number) => time.toString().padStart(2, '0');
 
@@ -93,8 +101,9 @@ const PromoBanner = () => {
             <Button 
               asChild
               className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white py-6 px-10 text-lg rounded-md flex items-center gap-3 group shadow-lg shadow-morocco-terracotta/20"
+              onClick={handleNavigationClick}
             >
-              <Link to="/products">
+              <Link to="/products" onClick={handleNavigationClick}>
                 {t('shopNow') || 'Shop Now'} 
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -104,8 +113,9 @@ const PromoBanner = () => {
               asChild
               variant="outline" 
               className="border-white/70 text-white hover:bg-white/10 py-6 px-10 text-lg shadow-lg"
+              onClick={handleNavigationClick}
             >
-              <Link to="/new-arrivals">
+              <Link to="/new-arrivals" onClick={handleNavigationClick}>
                 {t('viewCollection') || 'View Collection'}
               </Link>
             </Button>
