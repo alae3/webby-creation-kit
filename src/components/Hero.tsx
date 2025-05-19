@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguageStore } from '@/store/languageStore';
 
 interface Slide {
   id: number;
@@ -47,6 +48,7 @@ const slides: Slide[] = [
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const { t } = useLanguageStore();
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -68,7 +70,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative h-[70vh] md:h-[75vh] lg:h-[80vh] overflow-hidden">
+    <div className="relative h-[75vh] md:h-[80vh] lg:h-[85vh] overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
@@ -79,24 +81,49 @@ const Hero = () => {
           aria-hidden={currentSlide !== index}
         >
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center transform transition-transform duration-2000"
             style={{
               backgroundImage: `url(${slide.image})`,
               backgroundPosition: slide.position,
+              transform: currentSlide === index ? "scale(1.05)" : "scale(1)",
             }}
           >
-            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/20"></div>
           </div>
           
           <div className="container-custom h-full flex items-center relative z-10">
-            <div className={`max-w-xl text-white animate-fade-in ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
-              <p className="text-xl md:text-2xl mb-8">{slide.subtitle}</p>
+            <div className={`max-w-xl text-white transition-all duration-1000 ${
+              currentSlide === index && !isAnimating 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-10'
+            }`}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]">
+                {t(slide.title) || slide.title}
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 [text-shadow:_0_1px_5px_rgb(0_0_0_/_30%)]">
+                {t(slide.subtitle) || slide.subtitle}
+              </p>
               <Button 
-                className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md"
+                className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md group"
                 asChild
               >
-                <Link to={slide.link}>{slide.cta}</Link>
+                <Link to={slide.link}>
+                  {t(slide.cta) || slide.cta}
+                  <svg 
+                    className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth="2" 
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </Link>
               </Button>
             </div>
           </div>
@@ -106,18 +133,18 @@ const Hero = () => {
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors z-20"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors z-20 group"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-6 w-6 group-hover:-translate-x-1 transition-transform" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors z-20"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm rounded-full p-2 text-white hover:bg-white/30 transition-colors z-20 group"
         aria-label="Next slide"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
       </button>
 
       {/* Indicator dots */}
@@ -131,13 +158,23 @@ const Hero = () => {
               setCurrentSlide(index);
               setTimeout(() => setIsAnimating(false), 500);
             }}
-            className={`w-3 h-3 rounded-full transition-colors ${
-              currentSlide === index ? "bg-white" : "bg-white/40"
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              currentSlide === index ? "w-10 bg-white" : "bg-white/40"
             }`}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={currentSlide === index}
           />
         ))}
+      </div>
+      
+      {/* Scroll down indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 hidden md:block">
+        <div className="animate-bounce flex flex-col items-center text-white/80">
+          <span className="text-sm font-medium mb-1">{t('scrollDown') || 'Scroll Down'}</span>
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
       </div>
     </div>
   );
