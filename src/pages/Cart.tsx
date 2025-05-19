@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,21 +5,25 @@ import { Link } from "react-router-dom";
 import { ShoppingBag, Plus, Minus, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useLanguageStore } from "@/store/languageStore";
-
 const Cart = () => {
-  const { items, removeItem, updateQuantity, getTotal } = useCartStore();
-  const { language, t } = useLanguageStore();
-  
-  return (
-    <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    getTotal
+  } = useCartStore();
+  const {
+    language,
+    t
+  } = useLanguageStore();
+  return <div className="flex flex-col min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <Navbar />
       
       <main className="flex-1">
         <div className="container-custom py-12">
           <h1 className="text-3xl md:text-4xl font-bold text-morocco-navy mb-6">{t('yourCart')}</h1>
           
-          {items.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-sm p-8 flex flex-col items-center justify-center">
+          {items.length === 0 ? <div className="bg-white rounded-lg shadow-sm p-8 flex flex-col items-center justify-center">
               <ShoppingBag className="h-16 w-16 text-morocco-navy/20 mb-4" />
               <h2 className="text-xl font-medium mb-2">{t('cartEmpty')}</h2>
               <p className="text-gray-500 mb-6 text-center">
@@ -29,24 +32,17 @@ const Cart = () => {
               <Button asChild>
                 <Link to="/products">{t('startShopping')}</Link>
               </Button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            </div> : <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Cart Items */}
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-lg shadow-sm p-6">
                   <h2 className="text-xl font-medium mb-4">{t('cartItems')} ({items.length})</h2>
                   
                   <div className="divide-y">
-                    {items.map((item) => (
-                      <div key={item.id} className="py-4 flex flex-col sm:flex-row gap-4">
+                    {items.map(item => <div key={item.id} className="py-4 flex flex-col sm:flex-row gap-4">
                         {/* Product Image */}
                         <div className="w-full sm:w-24 h-24 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
-                          <img 
-                            src={item.image} 
-                            alt={item.name} 
-                            className="w-full h-full object-cover object-center"
-                          />
+                          <img src={item.image} alt={item.name} className="w-full h-full object-cover object-center" />
                         </div>
                         
                         {/* Product Details */}
@@ -60,45 +56,27 @@ const Cart = () => {
                             </span>
                           </div>
                           
-                          {item.category && (
-                            <span className="text-sm text-gray-500 capitalize">
+                          {item.category && <span className="text-sm text-gray-500 capitalize">
                               {item.category}
-                            </span>
-                          )}
+                            </span>}
                           
                           {/* Quantity Controls */}
                           <div className="mt-2 flex justify-between">
                             <div className="flex items-center gap-2">
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 w-8 p-0" 
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              >
+                              <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
                                 <Minus className="h-3 w-3" />
                               </Button>
                               <span className="w-8 text-center">{item.quantity}</span>
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 w-8 p-0" 
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              >
+                              <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
                                 <Plus className="h-3 w-3" />
                               </Button>
                             </div>
-                            <Button 
-                              variant="ghost" 
-                              size="sm" 
-                              className="text-red-500 hover:text-white hover:bg-red-500"
-                              onClick={() => removeItem(item.id)}
-                            >
+                            <Button variant="ghost" size="sm" className="text-red-500 hover:text-white hover:bg-red-500" onClick={() => removeItem(item.id)}>
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </div>
               </div>
@@ -132,24 +110,17 @@ const Cart = () => {
                     </Button>
                     
                     <div className="flex justify-between">
-                      <Link to="/size-guide" className="text-center text-morocco-navy hover:text-morocco-terracotta">
-                        {t('sizeGuide')}
-                      </Link>
-                      <Link to="/shipping" className="text-center text-morocco-navy hover:text-morocco-terracotta">
-                        {t('shippingAndReturns')}
-                      </Link>
+                      
+                      
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            </div>}
         </div>
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Cart;
