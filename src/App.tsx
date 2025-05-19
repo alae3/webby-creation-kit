@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +26,7 @@ import Stores from "./pages/Stores";
 import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import Collections from "./pages/Collections";
 
 // Create query client with enhanced error handling
 const queryClient = new QueryClient({
@@ -121,6 +121,7 @@ const App = () => {
               <Route path="/boys" element={<Boys />} />
               <Route path="/baby" element={<Baby />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/collections" element={<Collections />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -144,7 +143,7 @@ const Hero = () => {
                   className="border-white hover:bg-white/10 text-white px-8 py-6 text-lg"
                   asChild
                 >
-                  <Link to="/collections">
+                  <Link to="/products">
                     {t('viewAll') || 'View All'}
                   </Link>
                 </Button>
