@@ -19,7 +19,7 @@ export default {
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
-        '2xl': '1400px'
+        '2xl': '1440px'
       }
     },
     extend: {
@@ -57,7 +57,7 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-        // Moroccan-inspired color palette
+        // Enhanced Moroccan-inspired color palette
         morocco: {
           terracotta: "#E07A5F",
           blue: "#3D84A8",
@@ -65,6 +65,12 @@ export default {
           green: "#81B29A",
           navy: "#2A324B",
           sand: "#F7EDE2",
+          cream: "#F9F5F0",
+          rust: "#C85C44",
+          teal: "#2A9D8F",
+          gold: "#E9C46A",
+          sage: "#95AB89",
+          charcoal: "#232638",
         },
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
@@ -128,6 +134,22 @@ export default {
             opacity: '1',
             transform: 'translateX(0)'
           }
+        },
+        'float': {
+          '0%, 100%': {
+            transform: 'translateY(0)'
+          },
+          '50%': {
+            transform: 'translateY(-10px)'
+          }
+        },
+        'pulse-subtle': {
+          '0%, 100%': {
+            opacity: '1'
+          },
+          '50%': {
+            opacity: '0.8'
+          }
         }
       },
       animation: {
@@ -136,14 +158,25 @@ export default {
         'fade-in': 'fade-in 0.5s ease-out',
         'fade-out': 'fade-out 0.5s ease-out',
         'slide-in': 'slide-in 0.6s ease-out',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite'
       },
       fontFamily: {
         'heading': ['Playfair Display', 'serif'],
         'body': ['Montserrat', 'sans-serif'],
       },
-      backgroundImage: {
-        'moroccan-pattern': "url('data:image/svg+xml;utf8,<svg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><path d='M40 40L36.3 20 20 23.7 23.7 40z' fill='none' stroke='%23E07A5F' stroke-opacity='0.15' stroke-width='1.5'/><path d='M40 40v-8l-8 8zM20 20h8l-8 8z' fill='none' stroke='%23E07A5F' stroke-opacity='0.1' stroke-width='1'/></svg>')",
-      }
+      scale: {
+        '103': '1.03',
+      },
+      transitionDuration: {
+        '1500': '1500ms',
+        '2000': '2000ms',
+        '3000': '3000ms',
+      },
+      boxShadow: {
+        'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
+        'elegant': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+      },
     }
   },
   plugins: [require("tailwindcss-animate")],

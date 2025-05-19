@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
+    --background: 39 38% 97%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -16,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 18 70% 62%;
+    --primary: 22 76% 54%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 195 49% 45%;
+    --secondary: 195 54% 45%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 146 27% 60%;
+    --accent: 146 32% 60%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -35,7 +35,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -104,7 +104,7 @@
 /* Custom Utilities */
 @layer components {
   .container-custom {
-    @apply container px-4 md:px-6 xl:px-8;
+    @apply container px-4 md:px-6 xl:px-8 mx-auto;
   }
   
   .btn-primary {
@@ -116,7 +116,7 @@
   }
   
   .moroccan-shadow {
-    @apply shadow-lg shadow-morocco-terracotta/10;
+    @apply shadow-xl shadow-morocco-terracotta/10;
   }
   
   .section-title {
@@ -128,13 +128,13 @@
   }
   
   .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-transform duration-300 hover:scale-103;
   }
   
   .fade-up {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.8s ease-out forwards;
   }
   
   .hover-shadow {
@@ -143,6 +143,18 @@
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  .moroccan-pattern-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 40L36.3 20 20 23.7 23.7 40z' fill='none' stroke='%23E07A5F' stroke-opacity='0.15' stroke-width='1.5'/%3E%3Cpath d='M40 40v-8l-8 8zM20 20h8l-8 8z' fill='none' stroke='%23E07A5F' stroke-opacity='0.1' stroke-width='1'/%3E%3C/svg%3E");
+  }
+  
+  .elegant-card {
+    @apply bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-morocco-terracotta to-morocco-navy bg-clip-text text-transparent;
   }
 }
 
@@ -153,7 +165,42 @@
   }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
 /* Add smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Ornamental borders */
+.moroccan-border {
+  position: relative;
+}
+
+.moroccan-border::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, hsl(var(--primary)), transparent);
+  border-radius: 3px;
 }

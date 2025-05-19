@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguageStore } from '@/store/languageStore';
 import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 const CategoryFeature = () => {
   const { t, language } = useLanguageStore();
@@ -34,6 +35,7 @@ const CategoryFeature = () => {
     {
       id: 1,
       title: t('girlsCollection'),
+      subtitle: t('girlsCollectionSubtitle') || 'Elegant & Comfortable',
       image: images.girls,
       link: "/girls",
       category: 'girls' as const
@@ -41,6 +43,7 @@ const CategoryFeature = () => {
     {
       id: 2,
       title: t('boysCollection'),
+      subtitle: t('boysCollectionSubtitle') || 'Stylish & Durable',
       image: images.boys,
       link: "/boys",
       category: 'boys' as const
@@ -48,6 +51,7 @@ const CategoryFeature = () => {
     {
       id: 3,
       title: t('babyCollection'),
+      subtitle: t('babyCollectionSubtitle') || 'Soft & Gentle',
       image: images.baby,
       link: "/baby",
       category: 'baby' as const
@@ -55,34 +59,38 @@ const CategoryFeature = () => {
   ];
 
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-20 md:py-24 bg-morocco-sand/20">
       <div className="container-custom">
-        <h2 className="section-title text-center mb-4">{t('exploreCollections')}</h2>
-        <p className="section-subtitle text-center mb-12">{t('discoverLatestAdditions')}</p>
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1 bg-morocco-terracotta/20 text-morocco-terracotta text-sm font-medium rounded-full mb-4">
+            {t('collections') || 'Collections'}
+          </span>
+          <h2 className="section-title text-center mb-3">{t('exploreCollections')}</h2>
+          <p className="text-xl text-morocco-navy/70 max-w-2xl mx-auto">{t('discoverLatestAdditions')}</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {categories.map((category) => (
             <Link 
               to={category.link} 
               key={category.id}
-              className="group overflow-hidden relative rounded-lg moroccan-shadow hover-scale transition-all duration-300 aspect-[5/6]"
+              className="group overflow-hidden relative rounded-xl moroccan-shadow hover-scale transition-all duration-500 aspect-[5/6] block"
             >
-              <div className="absolute inset-0 bg-moroccan-pattern opacity-10 mix-blend-overlay z-10"></div>
+              <div className="absolute inset-0 moroccan-pattern-bg opacity-10 mix-blend-overlay z-10"></div>
               <img 
                 src={category.image} 
                 alt={category.title}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-[0.9] group-hover:brightness-[0.85]"
                 onError={() => handleImageError(category.category)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-morocco-navy/60 to-transparent flex items-end p-6">
-                <div className="text-white">
-                  <h3 className="text-xl md:text-2xl font-bold mb-2">{category.title}</h3>
-                  <span className="inline-flex items-center font-medium">
-                    {t('shopNow')}
-                    <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                  </span>
+              <div className="absolute inset-0 bg-gradient-to-t from-morocco-navy/80 via-morocco-navy/30 to-transparent flex flex-col justify-end p-8">
+                <div className="text-white transform transition-transform duration-300 group-hover:translate-y-[-10px]">
+                  <span className="text-sm text-white/80 font-medium block mb-2">{category.subtitle}</span>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-3">{category.title}</h3>
+                  <div className="flex items-center text-white space-x-2 font-medium opacity-90 group-hover:opacity-100">
+                    <span>{t('shopNow')}</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
               </div>
             </Link>
