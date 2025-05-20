@@ -54,6 +54,14 @@ const FeaturedProducts = () => {
     }
   }, [products]);
 
+  // Function to handle navigation clicks - scroll to top
+  const handleNavigationClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <section className="py-16 bg-morocco-sand/30">
       <div className="container-custom">
@@ -137,8 +145,9 @@ const FeaturedProducts = () => {
             className="btn-secondary"
             size="lg"
             asChild
+            onClick={handleNavigationClick}
           >
-            <Link to="/products">View All Products</Link>
+            <Link to="/products" onClick={handleNavigationClick}>View All Products</Link>
           </Button>
         </div>
       </div>

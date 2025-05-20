@@ -99,7 +99,7 @@ const Hero = () => {
               </p>
               
               <div className="flex space-x-4">
-                <Button className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md group" asChild onClick={handleNavigationClick}>
+                <Button className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md group" asChild>
                   <Link to={slide.link} onClick={handleNavigationClick} className="px-[12px] py-0">
                     {t(slide.cta) || slide.cta}
                     <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@ const Hero = () => {
                   </Link>
                 </Button>
                 
-                <Button variant="outline" className="border-white hover:bg-white/10 text-white px-8 py-6 text-lg" asChild onClick={handleNavigationClick}>
+                <Button variant="outline" className="border-white hover:bg-white/10 text-white px-8 py-6 text-lg" asChild>
                   <Link to="/products" onClick={handleNavigationClick} className="mx-3">
                     {t('viewAll') || 'View All'}
                   </Link>
