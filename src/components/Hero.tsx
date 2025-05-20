@@ -100,7 +100,7 @@ const Hero = () => {
               
               <div className="flex space-x-4">
                 <Button className="bg-morocco-terracotta hover:bg-morocco-terracotta/90 text-white px-8 py-6 text-lg rounded-md group" asChild onClick={handleNavigationClick}>
-                  <Link to={slide.link} onClick={handleNavigationClick}>
+                  <Link to={slide.link} onClick={handleNavigationClick} className="px-[12px] py-0">
                     {t(slide.cta) || slide.cta}
                     <svg className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
