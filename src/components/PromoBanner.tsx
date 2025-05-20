@@ -7,17 +7,18 @@ import { ArrowRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const PromoBanner = () => {
-  const { images } = useContentStore();
+  const { images, countdown } = useContentStore();
   const { t } = useLanguageStore();
-  const [timeLeft, setTimeLeft] = useState({
-    days: 10,
-    hours: 8,
-    minutes: 45,
-    seconds: 30
-  });
+  const [timeLeft, setTimeLeft] = useState(countdown);
 
   // Countdown timer effect
   useEffect(() => {
+    // Update the local state when the store changes
+    setTimeLeft(countdown);
+    
+    // Only run the countdown if enabled
+    if (!countdown.enabled) return;
+    
     const timer = setInterval(() => {
       setTimeLeft(prevTime => {
         let { days, hours, minutes, seconds } = prevTime;
@@ -41,12 +42,12 @@ const PromoBanner = () => {
           }
         }
         
-        return { days, hours, minutes, seconds };
+        return { days, hours, minutes, seconds, enabled: prevTime.enabled };
       });
     }, 1000);
     
     return () => clearInterval(timer);
-  }, []);
+  }, [countdown]);
 
   // Function to handle button clicks for scrolling to top
   const handleNavigationClick = () => {
@@ -115,30 +116,32 @@ const PromoBanner = () => {
               className="border-white/70 text-white hover:bg-white/10 py-6 px-10 text-lg shadow-lg"
               onClick={handleNavigationClick}
             >
-              <Link to="/new-arrivals" onClick={handleNavigationClick}>
+              <Link to="/products" onClick={handleNavigationClick}>
                 {t('viewCollection') || 'View Collection'}
               </Link>
             </Button>
           </div>
           
-          {/* Enhanced countdown timer */}
-          <div className="mt-12 flex justify-center">
-            <div className="grid grid-cols-4 gap-4 text-white">
-              {[
-                { value: formatTime(timeLeft.days), label: t('days') || 'Days' },
-                { value: formatTime(timeLeft.hours), label: t('hours') || 'Hours' },
-                { value: formatTime(timeLeft.minutes), label: t('minutes') || 'Minutes' },
-                { value: formatTime(timeLeft.seconds), label: t('seconds') || 'Seconds' }
-              ].map((item, index) => (
-                <div key={index} className="flex flex-col items-center">
-                  <div className="bg-white/15 backdrop-blur-md rounded-lg p-4 w-20 h-20 mb-2 flex items-center justify-center shadow-lg">
-                    <span className="text-3xl md:text-4xl font-bold">{item.value}</span>
+          {/* Enhanced countdown timer - only show if enabled */}
+          {countdown.enabled && (
+            <div className="mt-12 flex justify-center">
+              <div className="grid grid-cols-4 gap-4 text-white">
+                {[
+                  { value: formatTime(timeLeft.days), label: t('days') || 'Days' },
+                  { value: formatTime(timeLeft.hours), label: t('hours') || 'Hours' },
+                  { value: formatTime(timeLeft.minutes), label: t('minutes') || 'Minutes' },
+                  { value: formatTime(timeLeft.seconds), label: t('seconds') || 'Seconds' }
+                ].map((item, index) => (
+                  <div key={index} className="flex flex-col items-center">
+                    <div className="bg-white/15 backdrop-blur-md rounded-lg p-4 w-20 h-20 mb-2 flex items-center justify-center shadow-lg">
+                      <span className="text-3xl md:text-4xl font-bold">{item.value}</span>
+                    </div>
+                    <span className="text-sm text-white/80 font-medium">{item.label}</span>
                   </div>
-                  <span className="text-sm text-white/80 font-medium">{item.label}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
