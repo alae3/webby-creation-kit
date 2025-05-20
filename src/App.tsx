@@ -27,6 +27,7 @@ import Careers from "./pages/Careers";
 import Login from "./pages/Login";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import Collections from "./pages/Collections";
+import AdminDashboard from './pages/AdminDashboard';
 
 // Create query client with enhanced error handling
 const queryClient = new QueryClient({
@@ -132,6 +133,7 @@ const App = () => {
                   <Admin />
                 </ProtectedRoute>
               } />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/shipping" element={<ShippingReturns />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />

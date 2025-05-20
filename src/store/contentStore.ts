@@ -38,14 +38,24 @@ export interface CountdownSettings {
   enabled: boolean;
 }
 
+// Type for subscribers data
+export interface Subscriber {
+  email: string;
+  dateSubscribed: string;
+  name?: string;
+}
+
 interface ContentStore {
   textContent: WebsiteContent;
   images: WebsiteImages;
   countdown: CountdownSettings;
+  subscribers: Subscriber[];
   lastUpdated: number; // Timestamp to track updates
   updateTextContent: (content: Partial<WebsiteContent>) => void;
   updateImage: (key: keyof WebsiteImages, url: string) => void;
   updateCountdown: (settings: Partial<CountdownSettings>) => void;
+  addSubscriber: (subscriber: Subscriber) => void;
+  removeSubscriber: (email: string) => void;
   refreshContent: () => void; // Method to force a refresh
 }
 
@@ -99,12 +109,22 @@ const defaultCountdown: CountdownSettings = {
   enabled: true
 };
 
+// Sample subscribers (empty by default)
+const defaultSubscribers: Subscriber[] = [
+  { 
+    email: "sample@example.com", 
+    dateSubscribed: "2025-05-15", 
+    name: "Sample User" 
+  }
+];
+
 export const useContentStore = create<ContentStore>()(
   persist(
     (set, get) => ({
       textContent: defaultTextContent,
       images: defaultImages,
       countdown: defaultCountdown,
+      subscribers: defaultSubscribers,
       lastUpdated: Date.now(),
       updateTextContent: (content) => {
         set((state) => ({
@@ -127,9 +147,22 @@ export const useContentStore = create<ContentStore>()(
         }));
         console.log("Countdown updated:", settings);
       },
+      addSubscriber: (subscriber) => {
+        set((state) => ({
+          subscribers: [...state.subscribers, subscriber],
+          lastUpdated: Date.now()
+        }));
+        console.log("Subscriber added:", subscriber);
+      },
+      removeSubscriber: (email) => {
+        set((state) => ({
+          subscribers: state.subscribers.filter(sub => sub.email !== email),
+          lastUpdated: Date.now()
+        }));
+        console.log("Subscriber removed:", email);
+      },
       refreshContent: () => {
         // Force a refresh by updating the timestamp without changing content
-        // This will cause components to re-render when they use this value
         set({ lastUpdated: Date.now() });
         console.log("Content store refreshed at:", new Date().toISOString());
       }
