@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useLanguageStore } from '@/store/languageStore';
-import { Users, Clock, Settings } from 'lucide-react';
+import { Users, Clock, Settings, Package, ShoppingCart, FileText } from 'lucide-react';
 
 const Admin = () => {
   const { t } = useLanguageStore();
@@ -43,7 +43,7 @@ const Admin = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Settings className="mr-2 h-5 w-5" />
+              <FileText className="mr-2 h-5 w-5" />
               Content Management
             </CardTitle>
             <CardDescription>
@@ -56,9 +56,11 @@ const Admin = () => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button variant="default" className="w-full">
-              Manage Content
-            </Button>
+            <Link to="/admin/content" className="w-full">
+              <Button variant="default" className="w-full">
+                Manage Content
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
         
@@ -66,7 +68,7 @@ const Admin = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Settings className="mr-2 h-5 w-5" />
+              <Package className="mr-2 h-5 w-5" />
               Product Management
             </CardTitle>
             <CardDescription>
@@ -79,9 +81,11 @@ const Admin = () => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button variant="default" className="w-full">
-              Manage Products
-            </Button>
+            <Link to="/admin/products" className="w-full">
+              <Button variant="default" className="w-full">
+                Manage Products
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
         
@@ -89,7 +93,7 @@ const Admin = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Clock className="mr-2 h-5 w-5" />
+              <ShoppingCart className="mr-2 h-5 w-5" />
               Order Management
             </CardTitle>
             <CardDescription>
@@ -102,9 +106,11 @@ const Admin = () => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button variant="default" className="w-full">
-              Manage Orders
-            </Button>
+            <Link to="/admin/orders" className="w-full">
+              <Button variant="default" className="w-full">
+                Manage Orders
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
         
@@ -125,9 +131,11 @@ const Admin = () => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button variant="default" className="w-full">
-              Manage Customers
-            </Button>
+            <Link to="/admin/customers" className="w-full">
+              <Button variant="default" className="w-full">
+                Manage Customers
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
         
@@ -148,9 +156,11 @@ const Admin = () => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button variant="default" className="w-full">
-              Store Settings
-            </Button>
+            <Link to="/admin/settings" className="w-full">
+              <Button variant="default" className="w-full">
+                Store Settings
+              </Button>
+            </Link>
           </CardFooter>
         </Card>
       </div>
