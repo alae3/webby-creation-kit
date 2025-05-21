@@ -13,6 +13,9 @@ export interface PageContentStore {
   careers: PageContent;
   shipping: PageContent;
   contact: PageContent;
+  privacy: PageContent;
+  terms: PageContent;
+  cookies: PageContent;
 }
 
 // Initial page content
@@ -36,6 +39,18 @@ const initialPageContent: PageContentStore = {
   contact: {
     title: "Get in Touch",
     content: "Have questions about our products? Contact us directly or use the form below."
+  },
+  privacy: {
+    title: "Privacy Policy",
+    content: "This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from NajihKids."
+  },
+  terms: {
+    title: "Terms of Service",
+    content: "These Terms of Service govern your use of the website operated by NajihKids and the purchase of products through our website."
+  },
+  cookies: {
+    title: "Cookie Policy",
+    content: "This Cookie Policy explains how NajihKids uses cookies and similar technologies to recognize you when you visit our website."
   }
 };
 
