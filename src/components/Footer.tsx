@@ -1,16 +1,16 @@
-
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, X } from 'lucide-react';
 import { useSocialStore } from '@/store/socialStore';
 import { useLanguageStore } from '@/store/languageStore';
-
 const Footer = () => {
   const year = new Date().getFullYear();
-  const { socialLinks } = useSocialStore();
-  const { t } = useLanguageStore();
-  
-  return (
-    <footer className="bg-morocco-navy text-white pt-20">
+  const {
+    socialLinks
+  } = useSocialStore();
+  const {
+    t
+  } = useLanguageStore();
+  return <footer className="bg-morocco-navy text-white pt-20">
       {/* Decorative pattern */}
       <div className="relative">
         <div className="absolute inset-0 moroccan-pattern-bg opacity-10"></div>
@@ -30,36 +30,15 @@ const Footer = () => {
                 traditional craftsmanship with modern design for comfort and style.
               </p>
               <div className="flex space-x-5 mt-8">
-                {socialLinks.instagram && (
-                  <a 
-                    href={socialLinks.instagram} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10"
-                  >
+                {socialLinks.instagram && <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
                     <Instagram className="h-6 w-6" />
-                  </a>
-                )}
-                {socialLinks.facebook && (
-                  <a 
-                    href={socialLinks.facebook} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10"
-                  >
+                  </a>}
+                {socialLinks.facebook && <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
                     <Facebook className="h-6 w-6" />
-                  </a>
-                )}
-                {socialLinks.twitter && (
-                  <a 
-                    href={socialLinks.twitter} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10"
-                  >
+                  </a>}
+                {socialLinks.twitter && <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-morocco-terracotta transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
                     <X className="h-6 w-6" />
-                  </a>
-                )}
+                  </a>}
               </div>
             </div>
 
@@ -160,15 +139,8 @@ const Footer = () => {
                 {t('newsletterDesc') || 'Subscribe to receive updates, access to exclusive deals, and more.'}
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input 
-                  type="email" 
-                  placeholder={t('emailPlaceholder') || 'Your email address'} 
-                  className="px-4 py-3 rounded-md bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-morocco-terracotta/50 flex-1"
-                />
-                <button 
-                  type="submit" 
-                  className="px-6 py-3 bg-morocco-terracotta text-white rounded-md font-medium hover:bg-morocco-terracotta/90 transition-colors focus:outline-none focus:ring-2 focus:ring-morocco-terracotta"
-                >
+                
+                <button type="submit" className="px-6 py-3 bg-morocco-terracotta text-white rounded-md font-medium hover:bg-morocco-terracotta/90 transition-colors focus:outline-none focus:ring-2 focus:ring-morocco-terracotta">
                   {t('subscribe') || 'Subscribe'}
                 </button>
               </form>
@@ -194,8 +166,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
