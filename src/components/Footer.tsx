@@ -131,20 +131,7 @@ const Footer = () => {
 
           {/* Newsletter subscription (optional) */}
           <div className="border-t border-white/10 pt-10 pb-6 mb-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h4 className="text-xl font-semibold mb-4">
-                {t('joinNewsletter') || 'Join Our Newsletter'}
-              </h4>
-              <p className="text-gray-300 mb-6">
-                {t('newsletterDesc') || 'Subscribe to receive updates, access to exclusive deals, and more.'}
-              </p>
-              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                
-                <button type="submit" className="px-6 py-3 bg-morocco-terracotta text-white rounded-md font-medium hover:bg-morocco-terracotta/90 transition-colors focus:outline-none focus:ring-2 focus:ring-morocco-terracotta">
-                  {t('subscribe') || 'Subscribe'}
-                </button>
-              </form>
-            </div>
+            
           </div>
 
           {/* Bottom section */}
