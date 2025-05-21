@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePageContentStore } from '@/store/pageContentStore';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,6 +8,10 @@ import { useLanguageStore } from '@/store/languageStore';
 const Cookies = () => {
   const { pages } = usePageContentStore();
   const { t } = useLanguageStore();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   return (
     <div className="min-h-screen flex flex-col">
