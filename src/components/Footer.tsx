@@ -130,9 +130,7 @@ const Footer = () => {
           </div>
 
           {/* Newsletter subscription (optional) */}
-          <div className="border-t border-white/10 pt-10 pb-6 mb-8">
-            
-          </div>
+          
 
           {/* Bottom section */}
           <div className="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center">
